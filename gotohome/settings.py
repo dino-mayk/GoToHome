@@ -14,6 +14,7 @@ DEBUG = os.environ.get('DEBUG', default='True') == 'True'
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
+    'posts.apps.PostsConfig',
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
     'grappelli',

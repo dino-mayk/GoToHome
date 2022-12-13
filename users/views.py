@@ -1,12 +1,13 @@
 from django.contrib.auth import authenticate, login
-from django.shortcuts import redirect, render
-from django.views.generic import View
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
 
 from users.forms import CustomUserProfileForm, CustomUserSignUpForm
+from users.models import CustomUser
 
 
-class Signup(View):
-    def post(self, request):
+def signup(request):
+    if request.method == 'POST':
         form = CustomUserSignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
@@ -18,26 +19,18 @@ class Signup(View):
             login(request, user)
 
             return redirect('homepage:home')
-        return redirect('users:login')
-
-    def get(self, request):
-        form = CustomUserSignUpForm()
-        return render(request, 'users/signup.html', {'form': form})
+    form = CustomUserSignUpForm()
+    return render(request, 'users/signup.html', {'form': form})
 
 
-class Profile(View):
-    def post(self, request):
-        try:
-            form = CustomUserProfileForm(
-                request.POST or None,
-                instance=request.user)
-            form.save()
-        except ValueError:
-            pass
-        return render(request, 'users/profile.html', {'form': form})
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        form = CustomUserProfileForm(data=request.POST, instance=request.user)
+        update = form.save(commit=False)
+        update.user = request.user
+        update.save()
+    else:
+        form = CustomUserProfileForm(instance=request.user)
 
-    def get(sekf, request):
-        form = CustomUserProfileForm(
-            request.POST or None,
-            instance=request.user)
-        return render(request, 'users/profile.html', {'form': form})
+    return render(request, 'users/profile.html', {'form': form})
