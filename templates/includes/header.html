@@ -6,14 +6,16 @@
 
   <div class="container-fluid d-flex justify-content-end">
     {% if user.is_authenticated %}
-      <div class="flex-shrink-0 dropdown">
-        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="https://avatars.githubusercontent.com/u/94930027?v=4" alt="mdo" class="rounded-circle" width="32" height="32">
-        </a>
-        <ul class="dropdown-menu text-small shadow">
-          <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
-          <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выход</a></li>
-        </ul>
+      <div class='head'>
+        <div class="flex-shrink-0 dropdown">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://avatars.githubusercontent.com/u/94930027?v=4" alt="mdo" class="rounded-circle" width="32" height="32">
+          </a>
+          <ul class="dropdown-menu text-small shadow">
+            <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
+            <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выход</a></li>
+          </ul>
+        </div>
       </div>
     {% else %}
       <a type="button" class="btn btn-outline-light me-2" href="{% url 'users:login' %}">Войти</a>

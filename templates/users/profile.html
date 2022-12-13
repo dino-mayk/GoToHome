@@ -2,10 +2,12 @@
  
 {% block title %}Profile{% endblock %}
  
-{% block content %}
-<form action="." method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Update Profile</button>
-</form>
+<center>
+  {% block content %}
+  <form action="." method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Profile</button>
+  </form>
+</center>
 {% endblock %}
