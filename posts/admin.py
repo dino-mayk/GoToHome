@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Posts
+
+
+@admin.register(Posts)
+class AdminPosts(admin.ModelAdmin):
+    list_display = ['title', 'user', 'img_tmb']
