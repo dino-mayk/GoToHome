@@ -15,7 +15,7 @@ class Posts(models.Model):
         verbose_name='автор',
         help_text='выберете пользователя',
     )
-    name = models.CharField(
+    title = models.CharField(
         'Заголовок',
         max_length=150,
     )
@@ -69,7 +69,7 @@ class Posts(models.Model):
     cleanup_pre_delete.connect(sorl_delete)
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
         verbose_name = 'Пост'
