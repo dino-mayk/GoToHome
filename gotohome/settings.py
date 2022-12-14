@@ -98,14 +98,17 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static_dev'
 ]
 STATIC_ROOT = 'static'
-
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'Duck123321@yandex.ru'
+EMAIL_HOST_PASSWORD = 'Remygaga123321'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 LOGIN_URL = 'auth/login/'
 LOGIN_REDIRECT_URL = '/'
