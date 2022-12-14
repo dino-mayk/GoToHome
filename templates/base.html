@@ -21,7 +21,9 @@
 <body>
     {% include "includes/header.html" %}
     <main>
-        {% block content %}{% endblock %}
+        <div class="container-fluid">
+            {% block content %}{% endblock %}
+        </div>
     </main>
     {% include "includes/footer.html" %}
 <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
