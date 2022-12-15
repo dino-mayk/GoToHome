@@ -6,5 +6,5 @@ class PostsManager(models.Manager):
         return (
             self.get_queryset()
                 .select_related('user')
-                .order_by('name')
+                .order_by('title')
         )

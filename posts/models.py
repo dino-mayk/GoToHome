@@ -12,42 +12,49 @@ class Posts(models.Model):
     user = models.ForeignKey(
         CustomUser(),
         on_delete=models.CASCADE,
-        verbose_name='пользователь',
+        verbose_name='автор',
         help_text='выберете пользователя',
     )
-    name = models.CharField(
-        'name',
+    title = models.CharField(
+        'Заголовок',
         max_length=150,
     )
     text = HTMLField(
-        verbose_name='описание',
+        verbose_name='Описание',
         help_text='введите ваше описание поста',
     )
     photo = models.ImageField(
         upload_to='uploads/preview/%Y/%m',
-        verbose_name='картинка',
+        verbose_name='Картинка',
         help_text='загрузите картинку',
     )
     map_long = models.DecimalField(
         max_digits=9,
         decimal_places=6,
+        default=59.,
+        blank=True,
+        null=True,
     )
     map_lat = models.DecimalField(
         max_digits=9,
         decimal_places=6,
+        default=59.,
+        blank=True,
+        null=True,
     )
     is_favourites = models.BooleanField(
         default=False,
         verbose_name='в избранном',
     )
+
     objects = PostsManager()
 
     @property
     def get_img(self):
-        return get_thumbnail(self.upload, '300x300', crop='center', quality=51)
+        return get_thumbnail(self.photo, '300x300', crop='center', quality=51)
 
     def img_tmb(self):
-        if self.upload:
+        if self.photo:
             return mark_safe(
                 f'<img src="{self.get_img.url}">'
             )
@@ -62,8 +69,8 @@ class Posts(models.Model):
     cleanup_pre_delete.connect(sorl_delete)
 
     def __str__(self):
-        return self.upload.url
+        return self.title
 
     class Meta:
-        verbose_name = 'превью поста'
-        verbose_name_plural = 'превьюшки постов'
+        verbose_name = 'Пост'
+        verbose_name_plural = 'Посты'
