@@ -14,8 +14,14 @@ def posts_list(request):
     return render(request, template_name, context)
 
 
-def post_details(request):
-    pass
+def post_details(request, pk):
+    template_name = 'posts/post_detail.html'
+    print(pk)
+    post = Posts.objects.get(pk=pk)
+    context = {
+        'post': post,
+    }
+    return render(request, template_name, context)
 
 
 def add_post(request):

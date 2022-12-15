@@ -5,5 +5,5 @@
     {{ post.img_tmb }}
     <h2 class="fw-normal">{{ post.title }}</h2>
     <p>{{ post.text | safe | truncatewords_html:10 }}</p>
-    <p><a class="btn btn-secondary" href="#">Подробнее</a></p>
+    <p><a class="btn btn-secondary" href="{% url 'posts:posts_detail' post.id %}">Подробнее</a></p>
 </div>
