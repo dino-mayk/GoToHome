@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {% include 'includes/form.html' with form=form %}
+        <input type="submit" value="Добавить">
+    </form>
+
+{% endblock %}

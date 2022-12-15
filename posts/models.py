@@ -42,10 +42,18 @@ class Posts(models.Model):
         blank=True,
         null=True,
     )
-    is_favourites = models.BooleanField(
-        default=False,
-        verbose_name='в избранном',
+
+    ANIMAL_TYPES = [
+        (1, 'Кошка'),
+        (2, 'Собака'),
+        (3, 'Другое'),
+    ]
+    animal_type = models.PositiveSmallIntegerField(
+        verbose_name='Тип животного',
+        choices=ANIMAL_TYPES,
+        default=3
     )
+
 
     objects = PostsManager()
 
