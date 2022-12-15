@@ -1,0 +1,9 @@
+.container {
+    margin-top: 50px;
+}
+
+.item,
+.item img {
+    width: 100%;
+    height: 600px;
+}

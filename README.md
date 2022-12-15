@@ -1,22 +1,29 @@
-Go To Home
+<p align="center">
+  <a href="#">
+    <img src="/static_dev/other/img/Stepanych.jpg" alt="logo" width="1000" height="1000">
+  </a>
+</p>
 
-![flake8 test](https://github.com/dino-mayk/IntensiveYandex/actions/workflows/python-package.yml/badge.svg)
+<h3 align="center">GoToHome</h3>
 
-# Оглавление
+## Table of contents
 
-- [Установка](#установка)
-- [Запуск](#запуск)
-- [Тесты](#тесты)
-- [Разработка](#разработка)
+- [Quick start](#quick-start)
+- [Status](#status)
+- [Creators](#creators)
+- [Thanks](#thanks)
+- [Sponsors](#sponsors)
+- [Copyright and license](#copyright-and-license)
 
-# Установка
 
-Клонируйте репозиторий:
+## Quick start
+
+Clone the repository:
 ```bash
-git clone https://github.com/dino-mayk/IntensiveYandex.git
+git clone https://github.com/dino-mayk/GoToHome.git
 ```
 
-Создайте виртуальное окружение:
+Create a virtual environment:
 
 Windows:
 ```bash
@@ -27,11 +34,13 @@ Mac, Linux:
 python3 -m venv venv
 ```
 
-Активируйте виртуальное окружение:
+Activate the virtual environment:
 
 Windows:
 ```bash
 cd venv/Scripts/
+```
+```bash
 .\activate
 ```
 Mac, Linux:
@@ -39,7 +48,7 @@ Mac, Linux:
 source venv/bin/activate
 ```
 
-Скачайте зависимости:
+Download dependencies:
 
 Windows:
 ```bash
@@ -50,7 +59,7 @@ Mac, Linux:
 pip3 install -r requirements.txt
 ```
 
-# Запуск 
+Launch:
 
 Windows:
 ```bash
@@ -61,110 +70,40 @@ Mac, Linux:
 python3 manage.py runserver
 ```
 
-# Тесты
+## Status
 
-Windows:
-```bash
-python manage.py test
-```
-Mac, Linux:
-```bash
-python3 manage.py test
-```
+![django](https://github.com/dino-mayk/GoToHome/actions/workflows/python-package.yml/badge.svg)
+![flake8](https://github.com/dino-mayk/GoToHome/actions/workflows/django.yml/badge.svg)
 
-# Разработка
 
-Создание миграции:
+## Creators
 
-Windows:
-```bash
-python manage.py makemigrations <app>
-```
-Mac, Linux:
-```bash
-python3 manage.py makemigrations <app>
-```
+**Krasnov Nikita**
 
-Добавление миграции:
+- <https://twitter.com/>
+- <https://github.com/>
 
-Windows:
-```bash
-python manage.py migrate
-```
-Mac, Linux:
-```bash
-python3 manage.py migrate
-```
+**Dmitry Ignatiev**
 
-Создание сквош миграции:
+- <https://twitter.com/>
+- <https://github.com/>
 
-Windows:
-```bash
-python manage.py squashmigrations <appname> <squashfrom> <squashto>
-```
-Mac, Linux:
-```bash
-python3 manage.py squashmigrations <appname> <squashfrom> <squashto>
-```
+**Timofey Kiryachek**
 
-Создание фикстур:
+- <https://twitter.com/>
+- <https://github.com/>
 
-Windows:
-```bash
-python manage.py dumpdata > data.json
-```
-Mac, Linux:
-```bash
-python3 manage.py dumpdata > data.json
-```
 
-Запуск isort:
+## Thanks
 
-```bash
-isort .
-```
+Thanks to our mentors from the [Yandex Academy](https://academy.yandex.ru/)
 
-Диаграмма базы данных:
 
-```bash
-https://app.quickdatabasediagrams.com/#/d/ReX14b
-```
+## Sponsors
 
-Создание администратора:
+No yet :(
 
-Windows:
-```bash
-python manage.py createsuperuser
-```
 
-Mac, Linux:
-```bash
-python3 manage.py createsuperuser
-```
+## Copyright and license
 
-Смена пароля в аккаунте:
-
-Windows:
-```bash
-python manage.py changepassword <user_name>
-```
-
-Mac, Linux:
-```bash
-python3 manage.py changepassword <user_name>
-```
-
-Создание приложения:
-
-Windows:
-```bash
-python manage.py startapp <app_name>
-```
-
-Mac, Linux:
-```bash
-python3 manage.py startapp <app_name>
-```
-
-Критичные данные располагаются в .env локально, для разработки в dev.env.
-Чтобы запустить на production измените комментарий в settings.py.
+No yet :(

@@ -3,7 +3,44 @@
 {% load static %}
 
 {% block content %}
-    <div class="container">
-        <h1>hello</h1>
+<link rel="stylesheet" href="{% static 'other/css/index.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="{% static 'other/img/carousel1.jpg' %}">
+        <div class="carousel-caption">
+            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="{% static 'other/img/carousel2.jpg' %}">
+      </div>
+    
+      <div class="item">
+        <img src="{% static 'other/img/carousel1.jpg' %}">
+      </div>
     </div>
+
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        {% include "includes/small_post_card.html" %}
+    </div>
+
+    <!-- map -->
+    <!-- footer -->
+</div>
 {% endblock %}

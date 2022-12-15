@@ -14,6 +14,7 @@ DEBUG = os.environ.get('DEBUG', default='True') == 'True'
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
+    'posts.apps.PostsConfig',
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
     'grappelli',
@@ -125,7 +126,7 @@ if DEBUG:
     INTERNAL_IPS = ['127.0.0.1', ]
 
     import mimetypes
-    mimetypes.add_type("application/javascript", ".js", True)
+    mimetypes.add_type("application/javascript", ".js")
 
     DEBUG_TOOLBAR_CONFIG = {
         'INTERCEPT_REDIRECTS': False,
