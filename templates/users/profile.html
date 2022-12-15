@@ -4,10 +4,20 @@
  
 <center>
   {% block content %}
+  <h3>Ваш профиль</h3>
   <form action="." method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Update Profile</button>
+    <button class="btn btn-primary" type="submit">Обновить профиль</button>
+    <a class="btn btn-warning" role="button" href='/auth/password_change'>Поменять пароль</a>
+    <a class="btn btn-danger" role="button" href='/auth/logout'>Выйти</a>
   </form>
+  {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 </center>
 {% endblock %}

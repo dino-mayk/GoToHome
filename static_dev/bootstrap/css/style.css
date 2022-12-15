@@ -1,3 +1,7 @@
 .head{
     margin-right: 10%;
 }
+
+input.form-control{
+    width: calc(20%);
+}

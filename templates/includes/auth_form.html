@@ -1,5 +1,5 @@
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">подтвердить</button>
+    <p>{{ form.username }}</p>
+    <p>{{ form.password }}</p>
 </form>

@@ -1,4 +1,9 @@
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.forms import (
+    UserChangeForm,
+    UserCreationForm,
+    PasswordChangeForm
+)
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 
 from users.models import CustomUser
 
@@ -21,12 +26,34 @@ class CustomUserProfileForm(UserChangeForm):
         model = CustomUser
         fields = (
             'username',
-            'first_name',
+            'city'
         )
         labels = {
-            'first_name': 'Имя',
+            'username': 'Ваше имя',
+            'city': 'Город, где вы живете'
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control'
+
+
+class LoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control'
+
+
+class PasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control'
+
+
+class PasswordChangeForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():

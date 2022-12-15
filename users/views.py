@@ -1,9 +1,16 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
+from django.contrib import messages
+from django.contrib.auth.views import LoginView, PasswordResetView
+from django.contrib.auth.views import PasswordChangeView
 
-from users.forms import CustomUserProfileForm, CustomUserSignUpForm
-from users.models import CustomUser
+from users.forms import (
+    CustomUserProfileForm,
+    CustomUserSignUpForm,
+    LoginForm,
+    PasswordResetForm,
+    PasswordChangeForm)
 
 
 def signup(request):
@@ -30,7 +37,20 @@ def profile(request):
         update = form.save(commit=False)
         update.user = request.user
         update.save()
+        messages.info(request, 'Вы успешно обновили профиль!')
     else:
         form = CustomUserProfileForm(instance=request.user)
 
     return render(request, 'users/profile.html', {'form': form})
+
+
+class Login(LoginView):
+    form_class = LoginForm
+
+
+class PasswordReset(PasswordResetView):
+    form_class = PasswordResetForm
+
+
+class PasswordChange(PasswordChangeView):
+    form_class = PasswordChangeForm

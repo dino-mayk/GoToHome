@@ -4,8 +4,12 @@
 {% block content %}
 <center>
     <h2>Вход</h2>
-    {% include "includes/auth_form.html" %}
-    <br>
-    <button><a href='/auth/password_reset'>Восстановить пароль</a></button>
+    <form method="post">
+        {% csrf_token %}
+        <p>{{ form.as_p }}</p>
+        <br>
+        <button class="btn btn-primary" type="submit">подтвердить</button>
+        <a class="btn btn-primary" role="button" href='/auth/password_reset'>Восстановить пароль</a>
+    </form>
 </center>
 {% endblock %}
