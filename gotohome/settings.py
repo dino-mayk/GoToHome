@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # dotenv_path = join(dirname(__file__), '.env')
-dotenv_path = join(dirname(__file__), 'dev.env')
+dotenv_path = join(dirname(__file__), '../dev.env')
 load_dotenv(dotenv_path)
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG', default='True') == 'True'
@@ -20,6 +20,14 @@ INSTALLED_APPS = [
     'grappelli',
     'tinymce',
     'sorl.thumbnail',
+
+    # 'imagekit',
+    # 'ckeditor',
+    # 'ckeditor_uploader',
+    # 'colorful',
+    # 'adminsortable',
+    # 'djeym',
+
     'django_cleanup.apps.CleanupConfig',
     'django.contrib.admin',
     'django.contrib.auth',
