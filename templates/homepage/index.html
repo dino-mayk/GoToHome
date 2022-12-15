@@ -37,7 +37,9 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        {% include "includes/small_post_card.html" %}
+        {% for post in posts %}
+            {% include "includes/small_post_card.html" with post=post  %}
+        {% endfor %}
     </div>
 
     <!-- map -->

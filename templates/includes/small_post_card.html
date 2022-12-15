@@ -1,9 +1,9 @@
 {% load static %}
 
 <div class="col-lg-2 mr-3">
-    <img src="{% static 'other/img/Stepanych.jpg' %}" class="bd-placeholder-img rounded-circle" width="140" height="140">
-
-    <h2 class="fw-normal">Heading</h2>
-    <p>And lastly this, the third column of representative placeholder content.</p>
-    <p><a class="btn btn-secondary" href="#">View details »</a></p>
+{#    <img src="" class="bd-placeholder-img rounded-circle" width="140" height="140">#}
+    {{ post.img_tmb }}
+    <h2 class="fw-normal">{{ post.title }}</h2>
+    <p>{{ post.text | safe | truncatewords_html:10 }}</p>
+    <p><a class="btn btn-secondary" href="#">Подробнее</a></p>
 </div>

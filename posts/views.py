@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from .models import Posts
@@ -19,21 +19,25 @@ def post_details(request):
 
 
 def add_post(request):
-    form = PostsForms(request.POST or None)
+    form = PostsForms(request.POST, request.FILES,)
 
     template_name = 'posts/add_post.html'
 
     context = {
         'form': form,
     }
-    print(request.method)
-    if request.method == 'POST':
-        title, text, photo = request.POST.get('title'), \
-                             request.POST.get('text'), \
-                             request.POST.get('photo')
+    print(form.errors, request.FILES)
+    if request.method == 'POST' and form.is_valid():
+        title = form.cleaned_data.get('title')
+        text = form.cleaned_data.get('text')
+        photo = form.cleaned_data.get('photo')
+        animal_type = form.cleaned_data.get('animal_type')
         print(title, text, photo)
-        Posts.objects.create(title=title, text=text, photo=photo,
+        new_post = Posts.objects.create(title=title, text=text, photo=photo,
+                             animal_type=animal_type,
                              user=request.user)
+        new_post.save()
         messages.success(request, 'Ваш пост был успешно создан')
+        return redirect('homepage:home')
 
     return render(request, template_name, context)

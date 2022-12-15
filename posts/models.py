@@ -21,12 +21,13 @@ class Posts(models.Model):
     )
     text = HTMLField(
         verbose_name='Описание',
-        help_text='введите ваше описание поста',
+        # help_text='введите ваше описание поста',
     )
     photo = models.ImageField(
         upload_to='uploads/preview/%Y/%m',
         verbose_name='Картинка',
         help_text='загрузите картинку',
+        null=True
     )
     map_long = models.DecimalField(
         max_digits=9,
@@ -53,7 +54,6 @@ class Posts(models.Model):
         choices=ANIMAL_TYPES,
         default=3
     )
-
 
     objects = PostsManager()
 
