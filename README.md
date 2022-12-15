@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#">
-    <img src="/static_dev/other/img/Stepanych.jpg" alt="logo" width="500" height="500">
+    <img src="/static_dev/other/img/Stepanych.jpg" alt="logo" width="1000" height="1000">
   </a>
 </p>
 
