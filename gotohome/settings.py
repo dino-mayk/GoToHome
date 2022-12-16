@@ -17,6 +17,8 @@ INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
+    'chat',
+    'channels',
     'grappelli',
     'tinymce',
     'sorl.thumbnail',
@@ -58,8 +60,17 @@ TEMPLATES = [
         },
     },
 ]
-
+ASGI_APPLICATION = "gotohome.asgi.application"
 WSGI_APPLICATION = 'gotohome.wsgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 DATABASES = {
     'default': {
