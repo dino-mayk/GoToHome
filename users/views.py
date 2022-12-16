@@ -3,14 +3,15 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, PasswordResetView
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.views import PasswordChangeView, PasswordResetConfirmView
 
 from users.forms import (
     CustomUserProfileForm,
     CustomUserSignUpForm,
     LoginForm,
     PasswordResetForm,
-    PasswordChangeForm)
+    PasswordChangeForm,
+    PasswordResetConfirm)
 
 
 def signup(request):
@@ -54,3 +55,7 @@ class PasswordReset(PasswordResetView):
 
 class PasswordChange(PasswordChangeView):
     form_class = PasswordChangeForm
+
+
+class PasswordResetConfirm(PasswordResetConfirmView):
+    form_class = PasswordResetConfirm
