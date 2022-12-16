@@ -38,9 +38,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="filters" style="display: flex; justify-content: space-between; border: solid 2px mediumpurple">
-            <h4><a href="{% url 'homepage:home' 1 %}">Кошки</a></h4>
-            <h4><a href="{% url 'homepage:home' 2 %}">Собаки</a></h4>
-            <h4><a href="{% url 'homepage:home' 3 %}">Другое</a></h4>
+            {% for ind, type in animal_types %}
+                <h4><a href="{% url 'homepage:home' ind %}">{{ type }}</a></h4>
+            {% endfor %}
         </div>
 
         {% for post in posts %}

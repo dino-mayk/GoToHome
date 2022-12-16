@@ -4,7 +4,7 @@ from django_cleanup.signals import cleanup_pre_delete
 from sorl.thumbnail import delete, get_thumbnail
 from tinymce.models import HTMLField
 
-from posts.managers import PostsManager
+from posts.managers import PostsManager, FavManager
 from users.models import CustomUser
 
 
@@ -82,3 +82,15 @@ class Posts(models.Model):
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
+
+
+class Favourites(models.Model):
+
+    post = models.ForeignKey(Posts, on_delete=models.CASCADE,
+                             related_name='Пост')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,
+                             related_name='Пользователь')
+    objects = FavManager()
+    class Meta:
+        verbose_name = 'Избранный пост'
+        verbose_name_plural = 'Избранные посты'

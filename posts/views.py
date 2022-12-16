@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.db import models
 
-from .models import Posts
+from .models import Posts, Favourites
 from .forms import PostsForms
 
 
@@ -16,10 +17,22 @@ def posts_list(request):
 
 def post_details(request, pk):
     template_name = 'posts/post_detail.html'
-    print(pk)
     post = Posts.objects.get(pk=pk)
+    curr_post = Posts.objects.get(pk=pk)
+    fav = Favourites.objects.get_user_and_post(user=request.user,
+                                               post=curr_post)
+    if request.method == 'POST':
+        if fav.exists():
+            fav.delete()
+            messages.info(request, 'Больше не в избранных')
+        else:
+            Favourites.objects.create(user=request.user,
+                                      post=curr_post)
+            messages.info(request, 'Добавлено в избранные')
+
     context = {
         'post': post,
+        'is_fav': fav.exists(),
     }
     return render(request, template_name, context)
 
