@@ -11,6 +11,8 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('grappelli/', include('grappelli.urls'), name='grappelli'),
     path('tinymce/', include('tinymce.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('djeym/', include('djeym.urls', namespace='djeym')),
 ]
 
 if settings.DEBUG:
