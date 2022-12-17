@@ -4,7 +4,7 @@ from django_cleanup.signals import cleanup_pre_delete
 from sorl.thumbnail import delete, get_thumbnail
 from tinymce.models import HTMLField
 
-from posts.managers import PostsManager
+from posts.managers import PostsManager, FavManager
 from users.models import CustomUser
 
 
@@ -21,12 +21,13 @@ class Posts(models.Model):
     )
     text = HTMLField(
         verbose_name='Описание',
-        help_text='введите ваше описание поста',
+        # help_text='введите ваше описание поста',
     )
     photo = models.ImageField(
         upload_to='uploads/preview/%Y/%m',
         verbose_name='Картинка',
         help_text='загрузите картинку',
+        null=True
     )
     map_long = models.DecimalField(
         max_digits=9,
@@ -42,9 +43,16 @@ class Posts(models.Model):
         blank=True,
         null=True,
     )
-    is_favourites = models.BooleanField(
-        default=False,
-        verbose_name='в избранном',
+
+    ANIMAL_TYPES = [
+        (1, 'Кошка'),
+        (2, 'Собака'),
+        (3, 'Другое'),
+    ]
+    animal_type = models.PositiveSmallIntegerField(
+        verbose_name='Тип животного',
+        choices=ANIMAL_TYPES,
+        default=3
     )
 
     objects = PostsManager()
@@ -74,3 +82,19 @@ class Posts(models.Model):
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
+
+
+class Favourites(models.Model):
+
+    post = models.ForeignKey(Posts, on_delete=models.CASCADE,
+                             related_name='Пост')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,
+                             related_name='Пользователь')
+    objects = FavManager()
+
+    def __str__(self):
+        return f'{self.user} - {self.post}'
+
+    class Meta:
+        verbose_name = 'Избранный пост'
+        verbose_name_plural = 'Избранные посты'
