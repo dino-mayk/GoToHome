@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # dotenv_path = join(dirname(__file__), '.env')
-dotenv_path = join(dirname(__file__), 'dev.env')
+dotenv_path = join(dirname(__file__), '../dev.env')
 load_dotenv(dotenv_path)
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG', default='True') == 'True'
@@ -17,9 +17,19 @@ INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
+    'chat',
+    'channels',
     'grappelli',
     'tinymce',
     'sorl.thumbnail',
+
+    # 'imagekit',
+    # 'ckeditor',
+    # 'ckeditor_uploader',
+    # 'colorful',
+    # 'adminsortable',
+    # 'djeym',
+
     'django_cleanup.apps.CleanupConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -58,8 +68,17 @@ TEMPLATES = [
         },
     },
 ]
-
+ASGI_APPLICATION = "gotohome.asgi.application"
 WSGI_APPLICATION = 'gotohome.wsgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 DATABASES = {
     'default': {
@@ -99,14 +118,17 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static_dev'
 ]
 STATIC_ROOT = 'static'
-
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'Duck123321@yandex.ru'
+EMAIL_HOST_PASSWORD = 'Remygaga123321'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 LOGIN_URL = 'auth/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -123,7 +145,7 @@ if DEBUG:
     INTERNAL_IPS = ['127.0.0.1', ]
 
     import mimetypes
-    mimetypes.add_type("application/javascript", ".js", True)
+    mimetypes.add_type("application/javascript", ".js")
 
     DEBUG_TOOLBAR_CONFIG = {
         'INTERCEPT_REDIRECTS': False,

@@ -1,0 +1,12 @@
+<div class="container" style="border: black 1px solid; margin-bottom: 1em">
+    <h2 class="title">{{ post.title }} {% if is_fav %}(В избранных)
+                                        {% endif %}</h2>
+    <div class="post-content">
+        {{ post.img_tmb }}
+        <p class="post-text">{{ post.text | safe }}</p>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="{% if not is_fav %}Добавить в избранное{% else %}Убрать из избранных{% endif %}">
+    </form>
+</div>

@@ -37,7 +37,15 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        {% include "includes/small_post_card.html" %}
+        <div class="filters" style="display: flex; justify-content: space-between; border: solid 2px mediumpurple">
+            {% for ind, type in animal_types %}
+                <h4><a href="{% url 'homepage:home' ind %}">{{ type }}</a></h4>
+            {% endfor %}
+        </div>
+
+        {% for post in posts %}
+            {% include "includes/small_post_card.html" with post=post  %}
+        {% endfor %}
     </div>
 
     <!-- map -->
