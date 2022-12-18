@@ -1,7 +1,7 @@
 from django.forms import ModelForm
-from django import forms
 
 from .models import Posts
+
 
 class PostsForms(ModelForm):
 
@@ -24,6 +24,3 @@ class PostsForms(ModelForm):
             Posts.photo.field.name: 'Фото',
             Posts.animal_type.field.name: 'Тип животного',
         }
-        # widgets = {
-        #     Posts.animal_type.field.name: forms.
-        # }

@@ -4,7 +4,7 @@ from django_cleanup.signals import cleanup_pre_delete
 from sorl.thumbnail import delete, get_thumbnail
 from tinymce.models import HTMLField
 
-from posts.managers import PostsManager, FavManager
+from posts.managers import FavManager, PostsManager
 from users.models import CustomUser
 
 
@@ -21,13 +21,13 @@ class Posts(models.Model):
     )
     text = HTMLField(
         verbose_name='Описание',
-        # help_text='введите ваше описание поста',
+        help_text='введите ваше описание поста',
     )
     photo = models.ImageField(
         upload_to='uploads/preview/%Y/%m',
         verbose_name='Картинка',
         help_text='загрузите картинку',
-        null=True
+        null=True,
     )
     map_long = models.DecimalField(
         max_digits=9,
@@ -52,14 +52,19 @@ class Posts(models.Model):
     animal_type = models.PositiveSmallIntegerField(
         verbose_name='Тип животного',
         choices=ANIMAL_TYPES,
-        default=3
+        default=3,
     )
 
     objects = PostsManager()
 
     @property
     def get_img(self):
-        return get_thumbnail(self.photo, '300x300', crop='center', quality=51)
+        return get_thumbnail(
+            self.photo,
+            '300x300',
+            crop='center',
+            quality=51,
+        )
 
     def img_tmb(self):
         if self.photo:
@@ -86,10 +91,16 @@ class Posts(models.Model):
 
 class Favourites(models.Model):
 
-    post = models.ForeignKey(Posts, on_delete=models.CASCADE,
-                             related_name='Пост')
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,
-                             related_name='Пользователь')
+    post = models.ForeignKey(
+        Posts,
+        on_delete=models.CASCADE,
+        related_name='Пост',
+    )
+    user = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        related_name='Пользователь',
+    )
     objects = FavManager()
 
     def __str__(self):

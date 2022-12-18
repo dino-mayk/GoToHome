@@ -1,9 +1,8 @@
 {% load static %}
 
-<div class="col-lg-2 mr-3">
-{#    <img src="" class="bd-placeholder-img rounded-circle" width="140" height="140">#}
+<div class="col-lg-4 col-md-6 col-sm-12">
     {{ post.img_tmb }}
-    <h2 class="fw-normal">{{ post.title }}</h2>
-    <p>{{ post.text | safe | truncatewords_html:10 }}</p>
+    <h2 class="fw-normal">{{ post.title | truncatechars_html:20 }}</h2>
+    <p>{{ post.text | safe |truncatechars_html:40 }}</p>
     <p><a class="btn btn-secondary" href="{% url 'posts:posts_detail' post.id %}">Подробнее</a></p>
 </div>
