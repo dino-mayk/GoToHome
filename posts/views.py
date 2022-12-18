@@ -72,7 +72,7 @@ def add_post(request):
 def edit_post(request, pk):
 
     curr_post = get_object_or_404(Posts, pk=pk)
-    form = PostsForms(instance=curr_post)
+    form = PostsForms(data=request.POST, instance=curr_post)
     template_name = 'posts/edit_post.html'
 
     context = {
