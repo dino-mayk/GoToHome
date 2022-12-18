@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.db import models
 
 from .models import Posts, Favourites
 from .forms import PostsForms
+from core.models import update_attrs
 
 
 def posts_list(request):
@@ -38,6 +39,10 @@ def post_details(request, pk):
 
 
 def add_post(request):
+
+    if not request.user.is_shelter:
+        return redirect('posts:posts_list')
+
     form = PostsForms(request.POST, request.FILES,)
 
     template_name = 'posts/add_post.html'
@@ -49,14 +54,38 @@ def add_post(request):
     if request.method == 'POST' and form.is_valid():
         title = form.cleaned_data.get('title')
         text = form.cleaned_data.get('text')
+        age = form.cleaned_data.get('age')
+
         photo = form.cleaned_data.get('photo')
         animal_type = form.cleaned_data.get('animal_type')
         print(title, text, photo)
         new_post = Posts.objects.create(title=title, text=text, photo=photo,
-                             animal_type=animal_type,
+                             age=age, animal_type=animal_type,
                              user=request.user)
         new_post.save()
         messages.success(request, 'Ваш пост был успешно создан')
         return redirect('homepage:home')
 
     return render(request, template_name, context)
+
+
+def edit_post(request, pk):
+
+    curr_post = get_object_or_404(Posts, pk=pk)
+    form = PostsForms(instance=curr_post)
+    template_name = 'posts/edit_post.html'
+
+    context = {
+        'form': form,
+    }
+    print(request.method, form.errors, form.is_valid())
+    if request.method == 'POST' and form.is_valid():
+        print(request.POST)
+        update_attrs(curr_post, **form.cleaned_data)
+        messages.success(request, 'Пост был успешно обновлен')
+
+    return render(request, template_name, context)
+
+
+def delete_post(request, pk):
+    pass

@@ -27,17 +27,20 @@ def signup(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        form = CustomUserProfileForm(data=request.POST, instance=request.user)
+        form = CustomUserProfileForm(instance=request.user)
         update = form.save(commit=False)
         update.user = request.user
         update.save()
     else:
         form = CustomUserProfileForm(instance=request.user)
-    fav_posts = Posts.objects.filter(pk__in=Favourites.objects.get_user_fav_posts(
+    if request.user.is_shelter:
+        posts = Posts.objects.filter(user=request.user)
+    else:
+        posts = Posts.objects.filter(pk__in=Favourites.objects.get_user_fav_posts(
             user=request.user
         ))
     context = {
         'form': form,
-        'fav_posts': fav_posts,
+        'fav_posts': posts,
     }
     return render(request, 'users/profile.html', context)

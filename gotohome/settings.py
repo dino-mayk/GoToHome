@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
+    'core.apps.CoreConfig',
     'chat',
     'channels',
     'grappelli',

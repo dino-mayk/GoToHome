@@ -11,7 +11,11 @@ class CustomUserSignUpForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'password1', 'password2', )
+        fields = ('username',
+                  'email', 'password1', 'password2', 'is_shelter')
+        labels = {
+            CustomUser.username.field.name: 'Имя пользователя',
+        }
 
 
 class CustomUserProfileForm(UserChangeForm):
