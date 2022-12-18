@@ -15,10 +15,10 @@ class CustomUser(AbstractUser):
     )
     email = models.EmailField(
         'email address',
-        unique=True
+        unique=True,
     )
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [
-        'username'
+        'username',
     ]
     objects = UserManager()
