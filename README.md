@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#">
-    <img src="/static_dev/other/img/Stepanych.jpg" alt="logo" width="1000" height="1000">
+    <img src="/static_dev/favicon_package/logo.svg" alt="logo" width="1000" height="1000">
   </a>
 </p>
 
@@ -57,6 +57,12 @@ pip install -r requirements.txt
 Mac, Linux:
 ```bash
 pip3 install -r requirements.txt
+```
+
+[Run docker](https://www.docker.com/):
+
+```bash
+docker run -p 6379:6379 -d redis:5
 ```
 
 Launch:
