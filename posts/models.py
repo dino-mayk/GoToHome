@@ -23,6 +23,10 @@ class Posts(models.Model):
         verbose_name='Описание',
         help_text='введите ваше описание поста',
     )
+
+    age = models.PositiveSmallIntegerField(verbose_name='Возраст',
+                                           default=0)
+
     photo = models.ImageField(
         upload_to='uploads/preview/%Y/%m',
         verbose_name='Картинка',

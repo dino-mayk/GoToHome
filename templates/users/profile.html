@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
 
-{% block title %}Профиль{% endblock %}
+{% block title %}Profile{% endblock %}
 
-<div class="container">
-  {% block content %}
-  <form action="." method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Изменить профиль</button>
-  </form>
+
+{% block content %}
+<div style="text-align: center;">
+    {{ user.img_tmb }}
+    {{ user.username }}
+    <form action="." method="post">
+        {% csrf_token %}
+        {% include 'includes/form.html' with form=form %}
+        <button type="submit">Update Profile</button>
+    </form>
+    {% if not user.is_shelter %}
       <h2>Избранные посты</h2>
       {% for post in fav_posts %}
           {% include 'includes/small_post_card.html' with post=post %}
       {% endfor %}
+    {% else %}
+        <h2>Свои посты</h2>
+        {% for post in fav_posts %}
+          {% include 'includes/small_post_card_edit.html' with post=post %}
+      {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}
