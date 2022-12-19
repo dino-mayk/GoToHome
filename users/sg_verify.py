@@ -12,8 +12,5 @@ try:
         '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'
     )
     response = sg.send(message)
-    print(response.status_code)
-    print(response.body)
-    print(response.headers)
 except Exception as e:
     print(e.message)
