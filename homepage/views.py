@@ -13,3 +13,9 @@ def home(request, filter=None):
         'animal_types': Posts.ANIMAL_TYPES,
     }
     return render(request, 'homepage/index.html', context)
+
+
+def map(request):
+    template_name = 'maps/shelter_maps.html'
+
+    return render(request, template_name)

@@ -13,9 +13,11 @@
     </nav>
     {% if user.is_authenticated %}
       <div class="user d-flex">
-        <a href="{% url 'posts:add_post' %}">
-            <img class="plus p-3" src="{% static 'bootstrap/icons/plus-lg.svg' %}">
-        </a>
+        {% if user.is_shelter %}
+          <a href="{% url 'posts:add_post' %}">
+              <img class="plus p-3" src="{% static 'bootstrap/icons/plus-lg.svg' %}">
+          </a>
+        {% endif %}
         <div class="flex-shrink-0 dropdown">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://avatars.githubusercontent.com/u/94930027?v=4" alt="mdo" class="rounded-circle" width="32" height="32">

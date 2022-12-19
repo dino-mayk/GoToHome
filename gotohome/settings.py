@@ -23,14 +23,12 @@ INSTALLED_APPS = [
     'grappelli',
     'tinymce',
     'sorl.thumbnail',
-
     'imagekit',
     'ckeditor',
     'ckeditor_uploader',
     'colorful',
     'adminsortable',
     'djeym',
-
     'django_cleanup.apps.CleanupConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -123,7 +121,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static_dev'
 ]
-STATIC_ROOT = 'static'
+STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
@@ -148,7 +146,7 @@ CKEDITOR_THUMBNAIL_SIZE = (300, 300)
 CKEDITOR_FORCE_JPEG_COMPRESSION = True
 CKEDITOR_IMAGE_QUALITY = 40
 CKEDITOR_IMAGE_BACKEND = 'pillow'
-CKEDITOR_ALLOW_NONIMAGE_FILES = False  # False - Only image files. (At your discretion)
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',

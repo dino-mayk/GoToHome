@@ -11,4 +11,3 @@ class CustomUserAdmin(admin.ModelAdmin):
         'is_staff',
         'img_tmb',
     )
-
