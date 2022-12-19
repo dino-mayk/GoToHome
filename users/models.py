@@ -1,8 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.safestring import mark_safe
-from sorl.thumbnail import get_thumbnail, delete
 from django_cleanup.signals import cleanup_pre_delete
+from sorl.thumbnail import delete, get_thumbnail
 
 from users.managers import UserManager
 
