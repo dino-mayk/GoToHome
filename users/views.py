@@ -1,10 +1,9 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 
-from users.forms import CustomUserProfileForm, CustomUserSignUpForm
-from users.models import CustomUser
 from posts.models import Favourites, Posts
+from users.forms import CustomUserProfileForm, CustomUserSignUpForm
 
 
 def signup(request):
@@ -36,9 +35,11 @@ def profile(request):
     if request.user.is_shelter:
         posts = Posts.objects.filter(user=request.user)
     else:
-        posts = Posts.objects.filter(pk__in=Favourites.objects.get_user_fav_posts(
-            user=request.user
-        ))
+        posts = Posts.objects.filter(
+            pk__in=Favourites.objects.get_user_fav_posts(
+                user=request.user
+            )
+        )
     context = {
         'form': form,
         'fav_posts': posts,

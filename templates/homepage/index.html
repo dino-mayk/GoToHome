@@ -5,6 +5,7 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'other/css/index.css' %}">
+<<<<<<< HEAD
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <!-- START VENDORS CSS -->
@@ -22,35 +23,38 @@
       Rotate: mdi-rotate-45|mdi-rotate-90|mdi-rotate-135|mdi-rotate-180|mdi-rotate-225|mdi-rotate-270|mdi-rotate-315
       Flip: mdi-flip-h|mdi-flip-v
       Color: mdi-light|mdi-light mdi-inactive|mdi-dark|mdi-dark mdi-inactive or color: #212121; -->
+=======
+>>>>>>> dev
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-
-    <div class="carousel-inner">
-      <div class="item active">
-        <img src="{% static 'other/img/carousel1.jpg' %}">
-        <div class="carousel-caption">
-            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-        </div>
-      </div>
-
-      <div class="item">
-        <img src="{% static 'other/img/carousel2.jpg' %}">
-      </div>
-    
-      <div class="item">
-        <img src="{% static 'other/img/carousel1.jpg' %}">
-      </div>
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'other/img/carousel1.jpg' %}" class="d-block" alt="Фото карусели">
     </div>
-
+    <div class="carousel-item">
+      <img src="{% static 'other/img/carousel2.jpg' %}" class="d-block" alt="Фото карусели">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'other/img/carousel3.jpg' %}" class="d-block" alt="Фото карусели">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 
 <div class="container">
+<<<<<<< HEAD
 
     <!-- START MAP -->
   <!-- Buttons are optional.
@@ -102,8 +106,17 @@
         </div>
 
         {% for post in posts %}
+=======
+    <nav class="nav nav-pills flex-column flex-sm-row">
+      {% for ind, type in animal_types %}
+        <a class="btn btn-outline-light flex-sm-fill text-sm-center m-5" aria-current="page" href="{% url 'homepage:home' ind %}">{{ type }}</a>
+      {% endfor %}
+    </nav>
+    <div class="row text-center">
+      {% for post in posts %}
+>>>>>>> dev
             {% include "includes/small_post_card.html" with post=post  %}
-        {% endfor %}
+      {% endfor %}
     </div>
 
     <!-- map -->

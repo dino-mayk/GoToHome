@@ -23,5 +23,9 @@ venv
 /.idea/jsLibraryMappings.xml
 /media/
 /send_mail/
+<<<<<<< HEAD
 /.idea/IntensiveYandex.iml
 /.idea/GoToHome.iml
+=======
+/.idea/IntensiveYandex.iml
+>>>>>>> dev

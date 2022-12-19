@@ -1,8 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.safestring import mark_safe
-from sorl.thumbnail import get_thumbnail, delete
 from django_cleanup.signals import cleanup_pre_delete
+from sorl.thumbnail import delete, get_thumbnail
 
 from users.managers import UserManager
 
@@ -19,7 +19,7 @@ class CustomUser(AbstractUser):
     )
     email = models.EmailField(
         'email address',
-        unique=True
+        unique=True,
     )
 
     IS_SHELTER_TYPES = [
@@ -60,7 +60,7 @@ class CustomUser(AbstractUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [
-        'username'
+        'username',
     ]
 
     objects = UserManager()
