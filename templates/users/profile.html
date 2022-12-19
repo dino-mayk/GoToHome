@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
- 
-{% block title %}Profile{% endblock %}
- 
-<center>
+
+{% block title %}Профиль{% endblock %}
+
+<div class="container">
   {% block content %}
   <form action="." method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Update Profile</button>
+    <button type="submit">Изменить профиль</button>
   </form>
-</center>
+      <h2>Избранные посты</h2>
+      {% for post in fav_posts %}
+          {% include 'includes/small_post_card.html' with post=post %}
+      {% endfor %}
+</div>
 {% endblock %}

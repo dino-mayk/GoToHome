@@ -1,3 +1,13 @@
 header {
     background-color: #652d90;
 }
+
+a {
+    text-decoration: none;
+}
+
+span.navbar-brand,
+span.navbar-brand a,
+span.navbar-brand {
+    color: white;
+}
