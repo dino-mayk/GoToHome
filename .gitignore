@@ -1,8 +1,6 @@
 .vscode
 .idea
-venv
-.env
-__pycache__
-static
 media
+venv
+/__pycache__/
 db.sqlite3
