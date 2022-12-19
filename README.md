@@ -14,6 +14,7 @@
 - [Thanks](#thanks)
 - [Sponsors](#sponsors)
 - [Copyright and license](#copyright-and-license)
+- [Schemes and models](#schemes-and-models)
 
 
 ## Quick start
@@ -124,3 +125,9 @@ No yet :(
 ## Copyright and license
 
 No yet :(
+
+
+## Schemes and models
+
+- [Miro](https://miro.com/app/board/uXjVP6-w5OI=)
+- [DB diagram](https://app.quickdatabasediagrams.com/#/d/kBHEAB/)
