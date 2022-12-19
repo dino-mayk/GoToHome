@@ -87,5 +87,5 @@ def edit_post(request, pk):
     return render(request, template_name, context)
 
 
-def delete_post(request, pk):
+def delete_post(request):
     pass
