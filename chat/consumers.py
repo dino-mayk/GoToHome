@@ -1,7 +1,6 @@
 import json
 
 from channels.generic.websocket import AsyncWebsocketConsumer
-from asgiref.sync import sync_to_async
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -26,7 +25,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         data = json.loads(text_data)
         message = data['message']
         username = data['username']
-        room = data['room']
+        # room = data['room']
 
         await self.channel_layer.group_send(
             self.room_group_name,
@@ -39,10 +38,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 
 async def chat_message(self, event):
-  message = event['message']
-  username = event['username']
+    message = event['message']
+    username = event['username']
 
-  await self.send(text_data=json.dumps({
-    'message': message,
-    'username': username
-  }))
+    await self.send(text_data=json.dumps({
+        'message': message,
+        'username': username
+    }))

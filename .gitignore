@@ -1,9 +1,6 @@
-/.vscode/
-/.idea/
-/venv/
-/.env/
+.vscode
+.idea
+media
+venv
 /__pycache__/
-/static/
-/db.sqlite3/
-/media/
-/db.sqlite3
+db.sqlite3

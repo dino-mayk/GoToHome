@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#">
-    <img src="/static_dev/other/img/Stepanych.jpg" alt="logo" width="1000" height="1000">
+    <img src="/static_dev/favicon_package/logo.svg" alt="logo">
   </a>
 </p>
 
@@ -80,18 +80,18 @@ python3 manage.py runserver
 
 **Krasnov Nikita**
 
-- <https://twitter.com/>
-- <https://github.com/>
+- <https://t.me/dino_mayk>
+- <https://github.com/dino-mayk>
 
 **Dmitry Ignatiev**
 
-- <https://twitter.com/>
-- <https://github.com/>
+- <https://t.me/nekoprrr>
+- <https://github.com/DmitriyIgnatev>
 
 **Timofey Kiryachek**
 
-- <https://twitter.com/>
-- <https://github.com/>
+- <https://t.me/TecHeReTiC>
+- <https://github.com/TecHeReTiC3141>
 
 
 ## Thanks

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Posts, Favourites
+from .models import Favourites, Posts
 
 
 @admin.register(Posts)
