@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'includes/form.html' with form=form %}
+        <div class="text-center m-2">
+            <button class="btn btn-primary">Добавить</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
