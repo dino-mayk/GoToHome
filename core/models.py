@@ -1,11 +1,4 @@
-# from django.db import models
-
 def update_attrs(instance, **kwargs):
-    """ Updates model instance attributes and saves the instance
-    :param instance: any Model instance
-    :param kwargs: dict with attributes
-    :return: updated instance, reloaded from database
-    """
     instance_pk = instance.pk
     for key, value in kwargs.items():
         if value is None or not value:

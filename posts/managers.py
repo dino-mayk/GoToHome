@@ -11,7 +11,6 @@ class PostsManager(models.Manager):
 
 
 class FavManager(models.Manager):
-
     def get_user_and_post(self, user, post):
         return self.filter(models.Q(user=user) & models.Q(post=post))
 
