@@ -23,6 +23,11 @@ urlpatterns = [
         name='profile',
     ),
     path(
+        'profile/<int:pk>',
+        views.profile,
+        name='shelter_profile',
+    ),
+    path(
         'login/',
         views.Login.as_view(
             template_name='users/login.html',

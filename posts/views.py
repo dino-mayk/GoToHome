@@ -88,4 +88,21 @@ def edit_post(request, pk):
 
 
 def delete_post(request, pk):
-    pass
+    template_name = 'posts/delete_post.html'
+
+    post_to_delete = get_object_or_404(Posts, pk=pk)
+
+    context = {
+        'post': post_to_delete,
+    }
+
+    if request.user.id != post_to_delete.user.id:
+        messages.error(request, 'У вас нет доступа к чужому посту')
+        return redirect('homepage:home')
+
+    if request.POST:
+        post_to_delete.delete()
+        messages.success(request, 'Ваш пост успешно удален')
+        return redirect('homepage:home')
+
+    return render(request, template_name, context)

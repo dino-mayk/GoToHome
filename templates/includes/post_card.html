@@ -1,14 +1,18 @@
 <div class="container text-center">
     <h2 class="title">{{ post.title }}{% if user.is_authenticated %}{% if is_fav %}(В избранных){% endif %}{% endif %}</h2>
-    <div class="post-content">
+    <div class="post-content" style="display: flex; padding: 1em; border: 3px solid black;
+     border-radius: 3px;">
         {{ post.img_tmb }}
-        <p class="post-text">{{ post.text | safe }}</p>
+        <div style="padding-left: 1em">
+            <a href="{% url 'users:profile' post.user.id %}">{{ post.author.username }}</a>
+            <h5>Возраст: {{ post.age }}</h5>
+            <p class="post-text" >{{ post.text | safe }}</p>
+        </div>
     </div>
     <form method="POST">
         {% csrf_token %}
         {% if user.is_authenticated %}
             <input type="submit" value="{% if not is_fav %}Добавить в избранное{% else %}Убрать из избранных{% endif %}">
         {% endif %}
-        </div>
     </form>
 </div>

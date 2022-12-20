@@ -50,3 +50,7 @@ def profile(request):
         ('posts_mine' if request.user.is_shelter else 'posts_fav'): profile_posts,
     }
     return render(request, 'users/profile.html', context)
+
+
+def shelter_profile(request, pk):
+    pass

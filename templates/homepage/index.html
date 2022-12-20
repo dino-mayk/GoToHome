@@ -40,10 +40,9 @@
     <script src="{% static "djeym/js/jquery-regex.min.js" %}"></script>
     {% djeym_yandex_map slug='priiuty-permskogo-kraia' lang=request.LANGUAGE_CODE %}
 
-
     <nav class="nav nav-pills flex-column flex-sm-row">
       {% for ind, type in animal_types %}
-        <a class="btn btn-outline-light flex-sm-fill text-sm-center m-5" aria-current="page" href="{% url 'homepage:home' ind %}">{{ type }}</a>
+        <a class="btn btn-warning flex-sm-fill text-sm-center m-5" aria-current="page" href="{% url 'homepage:home' ind %}">{{ type }}</a>
       {% endfor %}
     </nav>
     <div class="row text-center">

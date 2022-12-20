@@ -32,6 +32,7 @@ class CustomUser(AbstractUser):
         max_length=20,
         verbose_name='Город',
         null=True,
+        blank=True,
     )
 
     avatar = models.ImageField(upload_to='uploads/avatars/%Y/%m',
