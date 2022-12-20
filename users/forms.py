@@ -17,12 +17,13 @@ class CustomUserSignUpForm(UserCreationForm):
         for field in self.visible_fields():
             field.field.widget.attrs['class'] = 'form-control'
 
-    class Meta:
+    class Meta(UserCreationForm):
         model = CustomUser
         fields = ('username',
-                  'email', 'password1', 'password2', 'is_shelter')
+                  'email', 'password1', 'password2', 'is_shelter', 'avatar')
         labels = {
             CustomUser.username.field.name: 'Имя пользователя',
+            CustomUser.avatar.field.name: 'аватарка'
         }
 
 

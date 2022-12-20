@@ -4,5 +4,9 @@
     {{ post.img_tmb }}
     <h2 class="fw-normal">{{ post.title | truncatechars_html:20 }}</h2>
     <p>{{ post.text | safe |truncatechars_html:40 }}</p>
-    <p><a class="btn btn-secondary" href="{% url 'posts:posts_detail' post.id %}">Подробнее</a></p>
+    {% if user.is_authenticated %}
+        <p><a class="btn btn-secondary" href="{% url 'posts:posts_detail' post.id %}">Подробнее</a></p>
+    {% else %}
+        <p><a class="btn btn-secondary" href="{% url 'users:login' %}">Подробнее</a></p>
+    {% endif %}
 </div>

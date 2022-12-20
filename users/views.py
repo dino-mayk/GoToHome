@@ -13,20 +13,14 @@ class Login(LoginView):
 
 
 def signup(request):
-    if request.method == 'POST':
-        form = CustomUserSignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()
-            user.save()
-            password = form.cleaned_data.get('password1')
-
-            user = authenticate(email=user.email, password=password)
-            login(request, user)
-
-            return redirect('homepage:home')
-    form = CustomUserSignUpForm()
-    return render(request, 'users/signup.html', {'form': form})
+    form = CustomUserSignUpForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, 'Вы успешно зарегестрировались')
+    context = {
+        'form': form,
+    }
+    return render(request, 'users/signup.html', context)
 
 
 @login_required
@@ -39,15 +33,15 @@ def profile(request):
     else:
         form = CustomUserProfileForm(instance=request.user)
     if request.user.is_shelter:
-        posts = Posts.objects.filter(user=request.user)
-    else:
-        posts = Posts.objects.filter(
+        posts_mine = Posts.objects.filter(user=request.user)
+    posts_fav = Posts.objects.filter(
             pk__in=Favourites.objects.get_user_fav_posts(
                 user=request.user
             )
         )
     context = {
         'form': form,
-        'fav_posts': posts,
+        'posts_fav': posts_fav,
+        'posts_mine': posts_mine
     }
     return render(request, 'users/profile.html', context)
