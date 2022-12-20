@@ -13,10 +13,12 @@ class Login(LoginView):
 
 
 def signup(request):
-    form = CustomUserSignUpForm(request.POST or None)
+    form = CustomUserSignUpForm(data=request.POST, files=request.FILES)
     if request.method == 'POST' and form.is_valid():
-        form.save()
-        messages.success(request, 'Вы успешно зарегестрировались')
+        user = form.save()
+        messages.success(request, 'Вы успешно зарегистрировались')
+        login(request, user)
+        return redirect('homepage:home')
     context = {
         'form': form,
     }
@@ -26,7 +28,9 @@ def signup(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        form = CustomUserProfileForm(instance=request.user)
+        print(request.FILES)
+        form = CustomUserProfileForm(data=request.POST, files=request.FILES,
+                                     instance=request.user)
         update = form.save(commit=False)
         update.user = request.user
         update.save()

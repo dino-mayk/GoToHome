@@ -20,13 +20,12 @@
         <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
         <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
         <meta name="theme-color" content="#712cf9">
-    </head>
     <link href="signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
     
   <main class="form-signin w-100 m-auto">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <img class="mb-4" src="{% static 'favicon_package/logo.svg' %}" alt="" width="72" height="57">
       <h1 class="h3 mb-3 fw-normal">Регистрация</h1>

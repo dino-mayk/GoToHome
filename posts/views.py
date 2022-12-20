@@ -1,10 +1,10 @@
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.shortcuts import get_object_or_404, redirect, render
+from django.db import models
 
-from core.models import update_attrs
-
+from .models import Posts, Favourites
 from .forms import PostsForms
-from .models import Favourites, Posts
+from core.models import update_attrs
 
 
 def posts_list(request):
@@ -50,6 +50,7 @@ def add_post(request):
     context = {
         'form': form,
     }
+    print(form.errors, request.FILES)
     if request.method == 'POST' and form.is_valid():
         title = form.cleaned_data.get('title')
         text = form.cleaned_data.get('text')
@@ -57,14 +58,10 @@ def add_post(request):
 
         photo = form.cleaned_data.get('photo')
         animal_type = form.cleaned_data.get('animal_type')
-        new_post = Posts.objects.create(
-            title=title,
-            text=text,
-            photo=photo,
-            age=age,
-            animal_type=animal_type,
-            user=request.user
-        )
+        print(title, text, photo)
+        new_post = Posts.objects.create(title=title, text=text, photo=photo,
+                             age=age, animal_type=animal_type,
+                             user=request.user)
         new_post.save()
         messages.success(request, 'Ваш пост был успешно создан')
         return redirect('homepage:home')
@@ -75,18 +72,20 @@ def add_post(request):
 def edit_post(request, pk):
 
     curr_post = get_object_or_404(Posts, pk=pk)
-    form = PostsForms(data=request.POST, instance=curr_post)
+    form = PostsForms(data=request.POST, files=request.FILES, instance=curr_post)
     template_name = 'posts/edit_post.html'
 
     context = {
         'form': form,
     }
+    print(request.method, form.is_bound, form.errors, form.is_valid())
     if request.method == 'POST' and form.is_valid():
+        print(request.POST)
         update_attrs(curr_post, **form.cleaned_data)
         messages.success(request, 'Пост был успешно обновлен')
 
     return render(request, template_name, context)
 
 
-def delete_post(request):
+def delete_post(request, pk):
     pass

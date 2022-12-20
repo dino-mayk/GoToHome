@@ -9,11 +9,11 @@ from users.managers import UserManager
 
 class CustomUser(AbstractUser):
     username = models.CharField(
-        'username',
+        'Имя пользователя',
         max_length=150,
     )
     email = models.EmailField(
-        'email адресс',
+        'Email',
         unique=True,
     )
 
@@ -26,6 +26,12 @@ class CustomUser(AbstractUser):
         verbose_name='Приют или посетитель',
         choices=IS_SHELTER_TYPES,
         default=False,
+    )
+
+    city = models.CharField(
+        max_length=20,
+        verbose_name='Город',
+        null=True,
     )
 
     avatar = models.ImageField(upload_to='uploads/avatars/%Y/%m',
