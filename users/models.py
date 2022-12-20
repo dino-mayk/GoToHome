@@ -12,13 +12,8 @@ class CustomUser(AbstractUser):
         'username',
         max_length=150,
     )
-    city = models.CharField(
-        'city',
-        max_length=150,
-        default='Пермь',
-    )
     email = models.EmailField(
-        'email address',
+        'email адресс',
         unique=True,
     )
 

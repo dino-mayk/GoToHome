@@ -1,9 +1,15 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.contrib.auth.views import LoginView
+from django.shortcuts import redirect, render, reverse
 
 from posts.models import Favourites, Posts
-from users.forms import CustomUserProfileForm, CustomUserSignUpForm
+from users.forms import CustomUserProfileForm, CustomUserSignUpForm, LoginForm
+
+
+class Login(LoginView):
+    form_class = LoginForm
 
 
 def signup(request):

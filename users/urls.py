@@ -24,7 +24,7 @@ urlpatterns = [
     ),
     path(
         'login/',
-        LoginView.as_view(
+        views.Login.as_view(
             template_name='users/login.html',
         ),
         name='login',
