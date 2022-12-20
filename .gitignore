@@ -1,8 +1,9 @@
 .vscode
 .idea
+__pycache__
 venv
 .env
-__pycache__
 static
 media
+migrations
 db.sqlite3

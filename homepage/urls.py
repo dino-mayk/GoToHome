@@ -7,4 +7,5 @@ app_name = 'homepage'
 urlpatterns = [
     path('', views.home, name='home'),
     path('<int:filter>', views.home, name='home'),
+    path('map', views.map, name='map'),
 ]

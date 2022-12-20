@@ -14,16 +14,17 @@
 - [Thanks](#thanks)
 - [Sponsors](#sponsors)
 - [Copyright and license](#copyright-and-license)
+- [Schemes and models](#schemes-and-models)
 
 
 ## Quick start
 
-Clone the repository:
+### Clone the repository:
 ```bash
 git clone https://github.com/dino-mayk/GoToHome.git
 ```
 
-Create a virtual environment:
+### Create a virtual environment:
 
 Windows:
 ```bash
@@ -34,7 +35,7 @@ Mac, Linux:
 python3 -m venv venv
 ```
 
-Activate the virtual environment:
+### Activate the virtual environment:
 
 Windows:
 ```bash
@@ -48,7 +49,7 @@ Mac, Linux:
 source venv/bin/activate
 ```
 
-Download dependencies:
+### Install dependencies:
 
 Windows:
 ```bash
@@ -59,7 +60,24 @@ Mac, Linux:
 pip3 install -r requirements.txt
 ```
 
-Launch:
+### Download programs:
+
+#### Install to start the server:
+  - [Docker](https://www.docker.com/)
+
+#### Install for testing:
+  - [Chrome web browser](https://www.google.com/chrome/)
+  - [Chromedriver](https://sites.google.com/chromium.org/driver/getting-started)
+
+### Launch:
+
+#### Docker:
+
+```bash
+docker run -p 6379:6379 -d redis:5
+```
+
+#### Django server:
 
 Windows:
 ```bash
@@ -72,8 +90,8 @@ python3 manage.py runserver
 
 ## Status
 
-![django](https://github.com/dino-mayk/GoToHome/actions/workflows/python-package.yml/badge.svg)
-![flake8](https://github.com/dino-mayk/GoToHome/actions/workflows/django.yml/badge.svg)
+![flake8](https://github.com/dino-mayk/GoToHome/actions/workflows/python-package.yml/badge.svg)
+![django](https://github.com/dino-mayk/GoToHome/actions/workflows/django.yml/badge.svg)
 
 
 ## Creators
@@ -107,3 +125,9 @@ No yet :(
 ## Copyright and license
 
 No yet :(
+
+
+## Schemes and models
+
+- [Miro](https://miro.com/app/board/uXjVP6-w5OI=)
+- [DB diagram](https://app.quickdatabasediagrams.com/#/d/kBHEAB/)

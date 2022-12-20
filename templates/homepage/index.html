@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load i18n static djeymtags %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'other/css/index.css' %}">
@@ -33,6 +34,13 @@
 </div>
 
 <div class="container">
+
+    <div id="djeym-app" class="djeym"></div>
+    <script type="text/javascript" src="{% static "djeym/js/jquery.min.js" %}"></script>
+    <script src="{% static "djeym/js/jquery-regex.min.js" %}"></script>
+    {% djeym_yandex_map slug='priiuty-permskogo-kraia' lang=request.LANGUAGE_CODE %}
+
+
     <nav class="nav nav-pills flex-column flex-sm-row">
       {% for ind, type in animal_types %}
         <a class="btn btn-outline-light flex-sm-fill text-sm-center m-5" aria-current="page" href="{% url 'homepage:home' ind %}">{{ type }}</a>
@@ -43,8 +51,6 @@
             {% include "includes/small_post_card.html" with post=post  %}
       {% endfor %}
     </div>
-
-    <!-- map -->
-    <!-- footer -->
+    
 </div>
 {% endblock %}

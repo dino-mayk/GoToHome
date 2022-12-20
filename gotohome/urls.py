@@ -7,10 +7,12 @@ urlpatterns = [
     path('', include('homepage.urls'), name='homepage'),
     path('auth/', include('users.urls'), name='users'),
     path('posts/', include('posts.urls'), name='posts'),
-    path('', include('chat.urls'), name='chat'),
+    path("chat/", include("chat.urls"), name='chat'),
     path('admin/', admin.site.urls, name='admin'),
     path('grappelli/', include('grappelli.urls'), name='grappelli'),
     path('tinymce/', include('tinymce.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('djeym/', include('djeym.urls', namespace='djeym')),
 ]
 
 if settings.DEBUG:
