@@ -28,7 +28,6 @@ def signup(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        print(request.FILES)
         form = CustomUserProfileForm(data=request.POST, files=request.FILES,
                                      instance=request.user)
         update = form.save(commit=False)
@@ -53,4 +52,12 @@ def profile(request):
 
 
 def shelter_profile(request, pk):
-    pass
+    form = CustomUserProfileForm(instance=request.user)
+
+    shelter_posts = Posts.objects.filter(user__id=pk)
+    
+    context = {
+        'form': form,
+        'shelter_posts': shelter_posts,
+    }
+    return render(request, 'users/shelter_posts.html', context)

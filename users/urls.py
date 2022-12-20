@@ -24,7 +24,7 @@ urlpatterns = [
     ),
     path(
         'profile/<int:pk>',
-        views.profile,
+        views.shelter_profile,
         name='shelter_profile',
     ),
     path(

@@ -1,42 +1,50 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
 {% block content %}
-<main class="form-signin w-100 m-auto">
-<div style="text-align: center;">
-  {{ user.img_tmb }}
-  {{ user.username }}
-  <form action="." method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {% include 'includes/form.html' with form=form %}
-      <button type="submit">Обновить профиль</button>
-  </form>
-  {% if user.is_shelter %}
-    <h2>Свои посты</h2>
-      <div class="row">
-          {% if not posts_mine %}
-            <h3>Ваших постов нет, добавьте их :)</h3>
+<div class="container my-4 text-center">
+  <div class="card my-2">
+    <div class="card-body">
+      {{ user.img_tmb }}
+      <div class="container">
+        {% csrf_token %}
+        <form method="post" enctype="multipart/form-data">
+          {% include 'includes/form.html' with form=form %}
+          <button class="btn btn-primary m-2" type="submit">Обновить профиль</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    {% if user.is_shelter %}
+      <h2>Свои посты</h2>
+        <div class="row">
+            {% if not posts_mine %}
+              <h3>Ваших постов нет, добавьте их :)</h3>
+            {% else %}
+              {% for post in posts_mine %}
+                <div class='col-lg-4 col-md-6 col-sm-12'>
+                  {% include 'includes/small_post_card_edit.html' with post=post %}
+                </div>
+              {% endfor %}
+            {% endif %}
+        </div>
+    {% else %}
+        <h2>Избранные посты</h2>
+        <div class="row">
+
+          {% if not posts_fav %}
+            <h3>Вы не добавили никакого животного в избранное</h3>
+          {% else %}
+            {% for post in posts_fav %}
+              <div class='col-lg-4 col-md-6 col-sm-12'>
+                {% include 'includes/small_post_card.html' with post=post %}
+              </div>
+            {% endfor %}
           {% endif %}
-          {% for post in posts_mine %}
-            <div class='col-lg-4 col-md-6 col-sm-12'>
-              {% include 'includes/small_post_card_edit.html' with post=post %}
-            </div>
-          {% endfor %}
-      </div>
-  {% else %}
-      <h2>Избранные посты</h2>
-      <div class="row">
-
-        {% if not posts_fav %}
-          <h3>Вы не добавили никакого животного в избранное</h3>
-        {% endif %}
-        {% for post in posts_fav %}
-          <div class='col-lg-4 col-md-6 col-sm-12'>
-            {% include 'includes/small_post_card.html' with post=post %}
-          </div>
-        {% endfor %}
-      </div>
-  {% endif %}
-</main>
-
+        </div>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}
