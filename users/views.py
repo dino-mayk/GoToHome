@@ -32,16 +32,17 @@ def profile(request):
         update.save()
     else:
         form = CustomUserProfileForm(instance=request.user)
+
     if request.user.is_shelter:
-        posts_mine = Posts.objects.filter(user=request.user)
-    posts_fav = Posts.objects.filter(
+        profile_posts = Posts.objects.filter(user=request.user)
+    else:
+        profile_posts = Posts.objects.filter(
             pk__in=Favourites.objects.get_user_fav_posts(
                 user=request.user
             )
         )
     context = {
         'form': form,
-        'posts_fav': posts_fav,
-        'posts_mine': posts_mine
+        ('posts_mine' if request.user.is_shelter else 'posts_fav'): profile_posts,
     }
     return render(request, 'users/profile.html', context)
