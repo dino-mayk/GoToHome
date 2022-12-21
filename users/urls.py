@@ -42,7 +42,7 @@ urlpatterns = [
     ),
     path(
         'password_change/',
-        PasswordChangeView.as_view(
+        views.PasswordChange.as_view(
             template_name='users/password_change.html',
             success_url=reverse_lazy('users:password_change_done'),
         ),

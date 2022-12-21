@@ -1,12 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.shortcuts import get_object_or_404, redirect, render
 
 from posts.models import Favourites, Posts
-from users.forms import CustomUserProfileForm, CustomUserSignUpForm, LoginForm
+from users.forms import CustomUserProfileForm, CustomUserSignUpForm, LoginForm, PasswordChange
 from users.models import CustomUser
+from django.urls import reverse_lazy
 
 
 class Login(LoginView):
@@ -66,3 +67,8 @@ def shelter_profile(request, pk):
         'shelter': shelter,
     }
     return render(request, 'users/shelter_profile.html', context)
+
+
+class PasswordChange(PasswordChangeView):
+    form_class = PasswordChange
+    success_url = reverse_lazy('password_change_done')

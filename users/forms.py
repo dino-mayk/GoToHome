@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
-                                       UserCreationForm)
+                                       UserCreationForm, PasswordChangeForm)
 
 from users.models import CustomUser
 
@@ -41,6 +41,13 @@ class CustomUserProfileForm(UserChangeForm):
             'first_name': 'Имя',
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control'
+
+
+class PasswordChange(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
