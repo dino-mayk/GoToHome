@@ -19,7 +19,7 @@
                 {% csrf_token %}
                 {% if user.is_authenticated %}
                     {% if not user.is_shelter %}
-                        <a type="button" class="btn btn-warning m-1" href="{% url 'chat:room' post.id %}">Написать приюту</a>
+                        <a class="btn btn-warning m-1" href="{% url 'chat:room' post.id %}">Написать приюту</a>
                         <button class="btn btn-primary m-1" type="submit">
                             
                                 {% if not is_fav %}Добавить в избранное{% else %}Убрать из избранных{% endif %}

@@ -7,11 +7,23 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # dotenv_path = join(dirname(__file__), '.env')
-dotenv_path = join(dirname(__file__), '../dev.env')
-load_dotenv(dotenv_path)
-SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = os.environ.get('DEBUG', default='True') == 'True'
-ALLOWED_HOSTS = ['*']
+dotenv_path = join(
+    dirname(__file__),
+    '../dev.env',
+),
+load_dotenv(
+    dotenv_path,
+)
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+)
+DEBUG = os.environ.get(
+    'DEBUG',
+    default='True',
+) == 'True'
+ALLOWED_HOSTS = [
+    '*',
+]
 
 INSTALLED_APPS = [
     'posts.apps.PostsConfig',
@@ -19,6 +31,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'core.apps.CoreConfig',
     'chat.apps.ChatConfig',
+    'phonenumber_field',
     'daphne',
     'grappelli',
     'tinymce',
@@ -36,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -70,24 +82,26 @@ TEMPLATES = [
     },
 ]
 
-ASGI_APPLICATION = "gotohome.asgi.application"
+ASGI_APPLICATION = 'gotohome.asgi.application'
 WSGI_APPLICATION = 'gotohome.wsgi.application'
 
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [
+                ('127.0.0.1', 6379),
+            ],
         },
     },
 }
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-        "TEST": {
-            "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        'TEST': {
+            'NAME': BASE_DIR / 'db.sqlite3',
         },
     }
 }
@@ -113,14 +127,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-RU'
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static_dev'
+    BASE_DIR / 'static_dev',
 ]
 STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -143,7 +156,10 @@ AUTH_USER_MODEL = 'users.CustomUser'
 CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_FILENAME_GENERATOR = 'djeym.utils.get_filename'
-CKEDITOR_THUMBNAIL_SIZE = (300, 300)
+CKEDITOR_THUMBNAIL_SIZE = (
+    300,
+    300,
+)
 CKEDITOR_FORCE_JPEG_COMPRESSION = True
 CKEDITOR_IMAGE_QUALITY = 40
 CKEDITOR_IMAGE_BACKEND = 'pillow'
@@ -166,7 +182,7 @@ CKEDITOR_CONFIGS = {
                               'FF5722,D84315,795548,4E342E,607D8B,37474F,'
                               '9E9E9E,424242,000000,FFFFFF',
         'colorButton_enableAutomatic': False,
-        'colorButton_enableMore': True
+        'colorButton_enableMore': True,
     }
 }
 
@@ -184,10 +200,15 @@ if DEBUG:
     INSTALLED_APPS += [
         'debug_toolbar',
     ]
-    INTERNAL_IPS = ['127.0.0.1', ]
+    INTERNAL_IPS = [
+        '127.0.0.1',
+    ]
 
     import mimetypes
-    mimetypes.add_type("application/javascript", ".js")
+    mimetypes.add_type(
+        'application/javascript',
+        '.js',
+    )
 
     DEBUG_TOOLBAR_CONFIG = {
         'INTERCEPT_REDIRECTS': False,
