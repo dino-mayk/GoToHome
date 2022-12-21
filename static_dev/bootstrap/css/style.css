@@ -52,3 +52,6 @@
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
   }
+
+ul{text-align:center;}
+ul li{display:inline-block;}
