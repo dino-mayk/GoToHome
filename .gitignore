@@ -4,3 +4,11 @@ __pycache__
 venv
 .env
 static
+/media/
+/chat/migrations/0002_alter_message_options.py
+/users/migrations/0002_auto_20221220_1839.py
+/users/migrations/0003_auto_20221221_1727.py
+/users/migrations/0004_auto_20221221_1834.py
+/templates/users/password_change.html
+/templates/users/password_change_done.html
+/templates/users/shelter_profile.html
