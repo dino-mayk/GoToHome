@@ -2,10 +2,11 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from posts.models import Favourites, Posts
 from users.forms import CustomUserProfileForm, CustomUserSignUpForm, LoginForm
+from users.models import CustomUser
 
 
 class Login(LoginView):
@@ -56,10 +57,12 @@ def profile(request):
 def shelter_profile(request, pk):
     form = CustomUserProfileForm(instance=request.user)
 
+    shelter = get_object_or_404(CustomUser, pk=pk)
     shelter_posts = Posts.objects.filter(user__id=pk)
 
     context = {
         'form': form,
         'shelter_posts': shelter_posts,
+        'shelter': shelter,
     }
-    return render(request, 'users/shelter_posts.html', context)
+    return render(request, 'users/shelter_profile.html', context)

@@ -6,18 +6,19 @@
 <div class="container my-4 text-center">
   <div class="card">
     <div class="card-body">
-      {{ user.img_tmb }}
-      <div class="container">
-        
-      </div>
+      <div class="row m-5">
+        <div class='col-lg-4 col-md-6 col-sm-12'>
+            {{ shelter.img_tmb }}
+        </div>
+        <div class='col-lg-4 col-md-6 col-sm-12'>
+            <h5>{{shelter.username}}</h5>
+        </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <h2>Посты приюта</h2>
+<h2>Посты приюта</h2>
   <div class="row">
     {% if not shelter_posts %}
-      <h3>У приюта пока что нет постов(((</h3>
+      <h3>У приюта пока что нет постов</h3>
     {% else %}
       {% for post in shelter_posts %}
         <div class='col-lg-4 col-md-6 col-sm-12'>
@@ -25,6 +26,6 @@
         </div>
       {% endfor %}
     {% endif %}
-    </div>
+  </div>
 </div>
 {% endblock %}

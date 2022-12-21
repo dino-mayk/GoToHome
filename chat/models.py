@@ -12,5 +12,5 @@ class Message(models.Model):
 
     class Meta:
         ordering = ('date_added', )
-        verbose_name = 'Чат'
-        verbose_name_plural = 'Чаты'
+        verbose_name = 'Сообщение'
+        verbose_name_plural = 'Сообщения'
