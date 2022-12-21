@@ -1,18 +1,29 @@
+{% load static %}
+
+
 <div class="container text-center">
-    <h2 class="title">{{ post.title }}{% if user.is_authenticated %}{% if is_fav %}(В избранных){% endif %}{% endif %}</h2>
-    <div class="post-content" style="display: flex; padding: 1em; border: 3px solid black;
-     border-radius: 3px;">
-        {{ post.img_tmb }}
-        <div style="padding-left: 1em">
-            <a href="{% url 'users:profile' post.user.id %}">{{ post.author.username }}</a>
-            <h5>Возраст: {{ post.age }}</h5>
-            <p class="post-text" >{{ post.text | safe }}</p>
+    <div class="row m-5">
+        <div class='col-lg-4 col-md-6 col-sm-12'>
+            {{ post.img_tmb }}
+        </div>
+        <div class='col-lg-4 col-md-6 col-sm-12'>
+            <h5>
+                {{ post.title }}{% if user.is_authenticated %}{% if is_fav %}(В избранных){% endif %}{% endif %}
+            </h5>
+            <p>
+                Приют: <a class="card-text" href="{% url 'users:shelter_profile' post.user.id %}">{{ post.user.username }}</a>
+            </p>
+            <p class="card-text">Возраст животного: {{ post.age }}</p>
+            <p class="card-text" >{{ post.text | safe }}</p>
+            <form method="POST">
+                {% csrf_token %}
+                {% if user.is_authenticated %}
+                    <a type="button" class="btn btn-warning m-1" href="{% url 'chat:room' post.id %}">Написать приюту</a>
+                    <button class="btn btn-primary m-1" type="submit">
+                        {% if not is_fav %}Добавить в избранное{% else %}Убрать из избранных{% endif %}
+                    </button>
+                {% endif %}
+            </form>
         </div>
     </div>
-    <form method="POST">
-        {% csrf_token %}
-        {% if user.is_authenticated %}
-            <input type="submit" value="{% if not is_fav %}Добавить в избранное{% else %}Убрать из избранных{% endif %}">
-        {% endif %}
-    </form>
 </div>

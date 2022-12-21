@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
     'core.apps.CoreConfig',
-    'chat',
+    'chat.apps.ChatConfig',
     'daphne',
     'grappelli',
     'tinymce',

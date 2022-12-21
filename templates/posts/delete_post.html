@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <h2>Вы уверены, что хотите свой пост {{ post.title }}?</h2>
+<div class="conteainer text-center">
+    <h2>Вы уверены, что хотите свой пост "{{ post.title }}"?</h2>
     <form method="post">
         {% csrf_token %}
-        <input type="submit" value="Да">
+        <button class="btn btn-danger" type="submit">Да</button>
+        <a type="button" class="btn btn-primary" href="{% url 'users:profile' %}">Нет</a>
     </form>
-    <button><a href="{% url 'users:profile' %}" style="text-decoration: none">Нет</a></button>
+</div>
 {% endblock %}

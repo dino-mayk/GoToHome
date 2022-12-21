@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.db import models
+from django.shortcuts import get_object_or_404, redirect, render
 
-from .models import Posts, Favourites
-from .forms import PostsForms
 from core.models import update_attrs
+
+from .forms import PostsForms
+from .models import Favourites, Posts
 
 
 def posts_list(request):

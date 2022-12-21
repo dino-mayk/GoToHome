@@ -1,8 +1,8 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.shortcuts import redirect, render, reverse
+from django.shortcuts import redirect, render
 
 from posts.models import Favourites, Posts
 from users.forms import CustomUserProfileForm, CustomUserSignUpForm, LoginForm
@@ -46,7 +46,9 @@ def profile(request):
         )
     context = {
         'form': form,
-        ('posts_mine' if request.user.is_shelter else 'posts_fav'): profile_posts,
+        (
+            'posts_mine' if request.user.is_shelter else 'posts_fav'
+        ): profile_posts,
     }
     return render(request, 'users/profile.html', context)
 
@@ -55,7 +57,7 @@ def shelter_profile(request, pk):
     form = CustomUserProfileForm(instance=request.user)
 
     shelter_posts = Posts.objects.filter(user__id=pk)
-    
+
     context = {
         'form': form,
         'shelter_posts': shelter_posts,
