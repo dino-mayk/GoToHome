@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from django_cleanup.signals import cleanup_pre_delete
 from sorl.thumbnail import delete, get_thumbnail
+from phonenumber_field.modelfields import PhoneNumberField
 
 from users.managers import UserManager
 
@@ -33,6 +34,20 @@ class CustomUser(AbstractUser):
         verbose_name='Город',
         null=True,
         blank=True,
+    )
+
+    phone_number = PhoneNumberField(
+        blank=True)
+
+    address = models.CharField(
+        'адрес приюта',
+        max_length=100,
+        default='ваш адресс'
+    )
+
+    about = models.TextField(
+        'О приюте',
+        default='ваша информация о приюте'
     )
 
     avatar = models.ImageField(upload_to='uploads/avatars/%Y/%m',

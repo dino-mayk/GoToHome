@@ -36,6 +36,9 @@ class CustomUserProfileForm(UserChangeForm):
             'username',
             'first_name',
             'avatar',
+            'phone_number',
+            'address',
+            'about'
         )
         labels = {
             'first_name': 'Имя',

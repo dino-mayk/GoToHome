@@ -1,9 +1,15 @@
 {% csrf_token %}
 <div>
-    {% for field in form %}
+    {% if user.is_shelter %}
+        {% for field in form %}
         <div>
             {{field.label_tag}}
             <div>{{field}}</div>
         </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        {{ form.username.label_tag}}
+        {{ form.username }}
+    {% endif %}
+
 </div>

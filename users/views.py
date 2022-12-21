@@ -32,7 +32,7 @@ def profile(request):
     if request.method == 'POST':
         form = CustomUserProfileForm(data=request.POST, files=request.FILES,
                                      instance=request.user)
-        update = form.save(commit=False)
+        update = form.save()
         update.user = request.user
         update.save()
     else:
@@ -46,12 +46,20 @@ def profile(request):
                 user=request.user
             )
         )
-    context = {
-        'form': form,
-        (
-            'posts_mine' if request.user.is_shelter else 'posts_fav'
-        ): profile_posts,
-    }
+    if request.user.is_shelter:
+        context = {
+            'form': form,
+            (
+                'posts_mine' if request.user.is_shelter else 'posts_fav'
+            ): profile_posts,
+        }
+    else:
+        context = {
+            'form': form,
+            (
+                'posts_mine' if request.user.is_shelter else 'posts_fav'
+            ): profile_posts,
+        }
     return render(request, 'users/profile.html', context)
 
 
