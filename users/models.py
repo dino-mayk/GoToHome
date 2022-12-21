@@ -2,8 +2,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.safestring import mark_safe
 from django_cleanup.signals import cleanup_pre_delete
-from sorl.thumbnail import delete, get_thumbnail
 from phonenumber_field.modelfields import PhoneNumberField
+from sorl.thumbnail import delete, get_thumbnail
 
 from users.managers import UserManager
 

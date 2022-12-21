@@ -3,11 +3,12 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 
 from posts.models import Favourites, Posts
-from users.forms import CustomUserProfileForm, CustomUserSignUpForm, LoginForm, PasswordChange, CustomShelterProfileForm
+from users.forms import (CustomShelterProfileForm, CustomUserProfileForm,
+                         CustomUserSignUpForm, LoginForm, PasswordChange)
 from users.models import CustomUser
-from django.urls import reverse_lazy
 
 
 class Login(LoginView):
