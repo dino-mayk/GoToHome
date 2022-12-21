@@ -1,7 +1,6 @@
 {% load static %}
 
 <div class="row-lg-2 mr-3">
-{#    <img src="" class="bd-placeholder-img rounded-circle" width="140" height="140">#}
     {{ post.img_tmb }}
     <h2 class="fw-normal">{{ post.title }}</h2>
     <p>{{ post.text | safe | truncatewords_html:10 }}</p>

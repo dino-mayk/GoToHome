@@ -29,7 +29,7 @@
                 <h1 class="h3 mb-3 fw-normal">Вход</h1>
                 {{ form.as_p }}
                 <button class="w-100 btn btn-lg btn-primary m-1" type="submit">Войти</button>
-                <a type="button" class="w-100 btn btn-lg btn-warning" href="{% url 'users:password_reset' %}">Восстановить</a>
+                <a class="w-100 btn btn-lg btn-warning" href="{% url 'users:password_reset' %}">Восстановить</a>
                 <p class="mt-5 mb-3 text-muted">© {% now "Y" %} GoToHome, Inc</p>
             </form>
         </main>
