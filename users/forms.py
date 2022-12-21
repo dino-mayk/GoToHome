@@ -27,7 +27,7 @@ class CustomUserSignUpForm(UserCreationForm):
         }
 
 
-class CustomUserProfileForm(UserChangeForm):
+class CustomShelterProfileForm(UserChangeForm):
     password = None
 
     class Meta:
@@ -39,6 +39,26 @@ class CustomUserProfileForm(UserChangeForm):
             'phone_number',
             'address',
             'about'
+        )
+        labels = {
+            'first_name': 'Имя',
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control'
+
+
+class CustomUserProfileForm(UserChangeForm):
+    password = None
+
+    class Meta:
+        model = CustomUser
+        fields = (
+            'username',
+            'first_name',
+            'avatar',
         )
         labels = {
             'first_name': 'Имя',

@@ -5,7 +5,7 @@ from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.shortcuts import get_object_or_404, redirect, render
 
 from posts.models import Favourites, Posts
-from users.forms import CustomUserProfileForm, CustomUserSignUpForm, LoginForm, PasswordChange
+from users.forms import CustomUserProfileForm, CustomUserSignUpForm, LoginForm, PasswordChange, CustomShelterProfileForm
 from users.models import CustomUser
 from django.urls import reverse_lazy
 
@@ -30,14 +30,27 @@ def signup(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        form = CustomUserProfileForm(data=request.POST, files=request.FILES,
-                                     instance=request.user)
-        update = form.save()
-        update.user = request.user
-        update.save()
+        if not request.user.is_shelter:
+            form = CustomUserProfileForm(
+                data=request.POST,
+                files=request.FILES,
+                instance=request.user)
+            update = form.save(commit=False)
+            update.user = request.user
+            update.save()
+        else:
+            form = CustomShelterProfileForm(
+                data=request.POST,
+                files=request.FILES,
+                instance=request.user)
+            update = form.save(commit=False)
+            update.user = request.user
+            update.save()
     else:
-        form = CustomUserProfileForm(instance=request.user)
-
+        if request.user.is_shelter:
+            form = CustomShelterProfileForm(instance=request.user)
+        else:
+            form = CustomUserProfileForm(instance=request.user)
     if request.user.is_shelter:
         profile_posts = Posts.objects.filter(user=request.user)
     else:
@@ -46,20 +59,12 @@ def profile(request):
                 user=request.user
             )
         )
-    if request.user.is_shelter:
-        context = {
-            'form': form,
-            (
-                'posts_mine' if request.user.is_shelter else 'posts_fav'
-            ): profile_posts,
-        }
-    else:
-        context = {
-            'form': form,
-            (
-                'posts_mine' if request.user.is_shelter else 'posts_fav'
-            ): profile_posts,
-        }
+    context = {
+        'form': form,
+        (
+            'posts_mine' if request.user.is_shelter else 'posts_fav'
+        ): profile_posts,
+    }
     return render(request, 'users/profile.html', context)
 
 
