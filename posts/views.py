@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
 from core.models import update_attrs
-
 from posts.forms import PostsForms
 from posts.models import Favourites, Posts
 
@@ -124,6 +123,6 @@ def delete_post(request, pk):
     if request.POST:
         post_to_delete.delete()
         messages.success(request, 'Ваш пост успешно удален')
-        return redirect('homepage:home')
+        return redirect('users:profile')
 
     return render(request, template_name, context)

@@ -3,7 +3,6 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from django_cleanup.signals import cleanup_pre_delete
 from sorl.thumbnail import delete, get_thumbnail
-from django.core.validators import RegexValidator
 
 from users.managers import UserManager
 
@@ -26,14 +25,8 @@ class CustomUser(AbstractUser):
         choices=IS_SHELTER_TYPES,
         default=False,
     )
-    phone_regex = RegexValidator(
-        regex=r'^\+?1?\d{9,15}$',
-        message='Номер телефона должен быть введен в формате: "+999999999".'
-                'Допускается до 15 цифр.'
-    )
     phone_number = models.CharField(
         'Номер телефона',
-        validators=[phone_regex],
         max_length=17,
     )
     address = models.CharField(
@@ -45,11 +38,12 @@ class CustomUser(AbstractUser):
         'О приюте',
         default='ваша информация о приюте'
     )
-    avatar = models.ImageField(upload_to='uploads/avatars/%Y/%m',
-                               verbose_name='Аватар',
-                               help_text='загрузите картинку',
-                               default='default_avatar.jpg'
-                               )
+    avatar = models.ImageField(
+        upload_to='uploads/avatars/%Y/%m',
+        verbose_name='Аватар',
+        help_text='загрузите картинку',
+        default='default_avatar.jpg',
+    )
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [
         'username',

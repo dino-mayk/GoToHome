@@ -22,14 +22,17 @@ class PasswordChange(PasswordChangeView):
 
 def signup(request):
     form = CustomUserSignUpForm(data=request.POST, files=request.FILES)
+
     if request.method == 'POST' and form.is_valid():
         user = form.save()
         messages.success(request, 'Вы успешно зарегистрировались')
         login(request, user)
         return redirect('homepage:home')
+
     context = {
         'form': form,
     }
+
     return render(request, 'users/signup.html', context)
 
 
