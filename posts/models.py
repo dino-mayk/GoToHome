@@ -23,31 +23,16 @@ class Posts(models.Model):
         verbose_name='Описание',
         help_text='введите ваше описание поста',
     )
-
-    age = models.PositiveSmallIntegerField(verbose_name='Возраст',
-                                           default=0)
-
+    age = models.PositiveSmallIntegerField(
+        verbose_name='Возраст',
+        default=0,
+    )
     photo = models.ImageField(
         upload_to='uploads/preview/%Y/%m',
         verbose_name='Картинка',
         help_text='загрузите картинку',
         null=True,
     )
-    map_long = models.DecimalField(
-        max_digits=9,
-        decimal_places=6,
-        default=59.,
-        blank=True,
-        null=True,
-    )
-    map_lat = models.DecimalField(
-        max_digits=9,
-        decimal_places=6,
-        default=59.,
-        blank=True,
-        null=True,
-    )
-
     ANIMAL_TYPES = [
         (1, 'Кошка'),
         (2, 'Собака'),
@@ -58,7 +43,6 @@ class Posts(models.Model):
         choices=ANIMAL_TYPES,
         default=3,
     )
-
     objects = PostsManager()
 
     @property
@@ -94,7 +78,6 @@ class Posts(models.Model):
 
 
 class Favourites(models.Model):
-
     post = models.ForeignKey(
         Posts,
         on_delete=models.CASCADE,

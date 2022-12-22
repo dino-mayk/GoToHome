@@ -7,20 +7,10 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # dotenv_path = join(dirname(__file__), '.env')
-dotenv_path = join(
-    dirname(__file__),
-    '../dev.env',
-),
-load_dotenv(
-    dotenv_path,
-)
-SECRET_KEY = os.environ.get(
-    'SECRET_KEY',
-)
-DEBUG = os.environ.get(
-    'DEBUG',
-    default='True',
-) == 'True'
+dotenv_path = join(dirname(__file__), '../dev.env')
+load_dotenv(dotenv_path)
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG = os.environ.get('DEBUG', default='True') == 'True'
 ALLOWED_HOSTS = [
     '*',
 ]
@@ -31,7 +21,6 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'core.apps.CoreConfig',
     'chat.apps.ChatConfig',
-    'phonenumber_field',
     'daphne',
     'grappelli',
     'tinymce',

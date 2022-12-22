@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="row-lg-2 mr-3">
+<div class="col m-2">
     {{ post.img_tmb }}
     <h2 class="fw-normal">{{ post.title }}</h2>
     <p>{{ post.text | safe | truncatewords_html:10 }}</p>

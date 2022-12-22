@@ -15,6 +15,11 @@ class Login(LoginView):
     form_class = LoginForm
 
 
+class PasswordChange(PasswordChangeView):
+    form_class = PasswordChange
+    success_url = reverse_lazy('password_change_done')
+
+
 def signup(request):
     form = CustomUserSignUpForm(data=request.POST, files=request.FILES)
     if request.method == 'POST' and form.is_valid():
@@ -81,8 +86,3 @@ def shelter_profile(request, pk):
         'shelter': shelter,
     }
     return render(request, 'users/shelter_profile.html', context)
-
-
-class PasswordChange(PasswordChangeView):
-    form_class = PasswordChange
-    success_url = reverse_lazy('password_change_done')

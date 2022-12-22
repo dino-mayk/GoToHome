@@ -2,8 +2,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.safestring import mark_safe
 from django_cleanup.signals import cleanup_pre_delete
-from phonenumber_field.modelfields import PhoneNumberField
 from sorl.thumbnail import delete, get_thumbnail
+from django.core.validators import RegexValidator
 
 from users.managers import UserManager
 
@@ -17,44 +17,44 @@ class CustomUser(AbstractUser):
         'Email',
         unique=True,
     )
-
     IS_SHELTER_TYPES = [
         (False, 'Пользователь'),
         (True, 'Приют'),
     ]
-
     is_shelter = models.BooleanField(
         verbose_name='Приют или посетитель',
         choices=IS_SHELTER_TYPES,
         default=False,
     )
-
-    city = models.CharField(
-        max_length=20,
-        verbose_name='Город',
-        null=True,
-        blank=True,
+    phone_regex = RegexValidator(
+        regex=r'^\+?1?\d{9,15}$',
+        message='Номер телефона должен быть введен в формате: "+999999999".'
+                'Допускается до 15 цифр.'
     )
-
-    phone_number = PhoneNumberField(
-        blank=True)
-
+    phone_number = models.CharField(
+        'Номер телефона',
+        validators=[phone_regex],
+        max_length=17,
+    )
     address = models.CharField(
         'адрес приюта',
         max_length=100,
         default='ваш адресс'
     )
-
     about = models.TextField(
         'О приюте',
         default='ваша информация о приюте'
     )
-
     avatar = models.ImageField(upload_to='uploads/avatars/%Y/%m',
                                verbose_name='Аватар',
                                help_text='загрузите картинку',
                                default='default_avatar.jpg'
                                )
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = [
+        'username',
+    ]
+    objects = UserManager()
 
     @property
     def get_img(self):
@@ -74,13 +74,6 @@ class CustomUser(AbstractUser):
         delete(kwargs['file'])
 
     cleanup_pre_delete.connect(sorl_delete)
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = [
-        'username',
-    ]
-
-    objects = UserManager()
 
     def __str__(self):
         return f'{self.email}'

@@ -3,38 +3,47 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from core.models import update_attrs
 
-from .forms import PostsForms
-from .models import Favourites, Posts
+from posts.forms import PostsForms
+from posts.models import Favourites, Posts
 
 
 def posts_list(request):
     template_name = 'posts/posts_list.html'
+
     posts = Posts.objects.homepage()
     context = {
         'posts': posts,
     }
+
     return render(request, template_name, context)
 
 
 def post_details(request, pk):
     template_name = 'posts/post_detail.html'
+
     post = Posts.objects.get(pk=pk)
     curr_post = Posts.objects.get(pk=pk)
-    fav = Favourites.objects.get_user_and_post(user=request.user,
-                                               post=curr_post)
-    if request.method == 'POST':
+    fav = Favourites.objects.get_user_and_post(
+        user=request.user,
+        post=curr_post,
+    )
+
+    if request.method == 'POST' and not request.user.is_shelter:
         if fav.exists():
             fav.delete()
             messages.info(request, 'Больше не в избранных')
         else:
-            Favourites.objects.create(user=request.user,
-                                      post=curr_post)
+            Favourites.objects.create(
+                user=request.user,
+                post=curr_post,
+            )
             messages.info(request, 'Добавлено в избранные')
 
     context = {
         'post': post,
         'is_fav': fav.exists(),
     }
+
     return render(request, template_name, context)
 
 
@@ -67,7 +76,7 @@ def add_post(request):
         )
         new_post.save()
         messages.success(request, 'Ваш пост был успешно создан')
-        return redirect('homepage:home')
+        return redirect('users:profile')
 
     return render(request, template_name, context)
 
@@ -85,9 +94,16 @@ def edit_post(request, pk):
     context = {
         'form': form,
     }
+
+    if request.user.id != curr_post.user.id:
+        messages.error(request, 'У вас нет доступа к чужому посту')
+        return redirect('homepage:home')
+
     if request.method == 'POST' and form.is_valid():
         update_attrs(curr_post, **form.cleaned_data)
         messages.success(request, 'Пост был успешно обновлен')
+
+        return redirect('users:profile')
 
     return render(request, template_name, context)
 

@@ -18,15 +18,14 @@
               <img class="plus p-3" src="{% static 'bootstrap/icons/plus-lg.svg' %}">
           </a>
         {% endif %}
-        <div class="flex-shrink-0 dropdown">
+        <div class="dropdown">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="{{ user.get_img.url }}" alt="mdo" class="rounded-circle" width="32" height="32">
           </a>
-          <ul class="dropdown-menu text-small shadow">
+          <ul class="dropdown-menu text-center">
             <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>            
             <li><a class="dropdown-item" href="{% url 'users:password_change' %}">Изменить пароль</a></li>
             <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выход</a></li>
-
           </ul>
         </div>
       </div>
