@@ -4,6 +4,10 @@ from django.core.mail import send_mail
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from djeym.models import Placemark
+from gotohome.settings import EMAIL_HOST_USER
+
+from users.models import CustomUser
+
 
 def map(request):
     if not request.user.is_authenticated or not request.user.is_shelter:
@@ -31,15 +35,19 @@ def notify_email(instance, **kwargs):
     description = instance.body  # (html)
     image_url = instance.user_image.url
     """
+    print(instance.header, kwargs)
     # Notify administrator of a new custom marker.
     if instance.is_user_marker and not instance.is_sended_admin_email:
         subject = 'Text subject'
         message = 'Text message - Url: ' + \
             'http(s)://your.domain/admin/djeym/placemark/{}/change/'.format(instance.pk)
-        from_email = 'admin@site.net'  # or corporate email
-        recipient_list = ['admin@site.net']  # Your work email
+        from_email = EMAIL_HOST_USER  # or corporate email
+        staff_users = list(i['email'] for i in CustomUser.objects.filter(is_staff=True).values('email').distinct())
+        print(staff_users)
+        recipient_list = staff_users  # Your work email
         send_mail(subject, message, from_email,
                   recipient_list, fail_silently=False)
+
         # Required
         instance.is_sended_admin_email = True
         instance.save()
@@ -47,7 +55,7 @@ def notify_email(instance, **kwargs):
     elif instance.active and instance.is_user_marker and not instance.is_sended_user_email:
         subject = 'Text subject'
         message = 'Text message'
-        from_email = 'admin@site.net'  # Your work email
+        from_email = EMAIL_HOST_USER  # Your work email
         recipient_list = [instance.user_email]
         send_mail(subject, message, from_email,
                   recipient_list, fail_silently=False)

@@ -59,6 +59,9 @@ def signup_for_shelter(request):
 
 @login_required
 def profile(request):
+
+    if request.user.is_shelter:
+        messages.info(request, f'<a href="{reverse_lazy("maps:map")}">Вы можете добавить маркер своей организации на карту</a>')
     if request.method == 'POST':
         if not request.user.is_shelter:
             form = CustomUserProfileForm(
