@@ -65,10 +65,6 @@ pip3 install -r requirements.txt
 #### Install to start the server:
   - [Docker](https://www.docker.com/)
 
-#### Install for testing:
-  - [Chrome web browser](https://www.google.com/chrome/)
-  - [Chromedriver](https://sites.google.com/chromium.org/driver/getting-started)
-
 ### Launch:
 
 #### Docker:

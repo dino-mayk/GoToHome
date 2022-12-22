@@ -32,7 +32,16 @@
     {% else %}
       <div class="user">
         <a class="btn btn-outline-light m-1" href="{% url 'users:login' %}">Войти</a>
-        <a class="btn btn-warning m-1" href="{% url 'users:signup' %}">Зарегистрироваться</a>
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Зарегистрироваться
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="btn btn-warning" href="{% url 'users:signup_for_user' %}">Я пользователь</a></li>
+                <li><a class="btn btn-warning" href="{% url 'users:signup_for_shelter' %}">Я приют</a></li>
+              </ul>
+            </div>
+
       </div>
     {% endif %}
   </div>

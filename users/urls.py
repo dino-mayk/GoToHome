@@ -11,9 +11,14 @@ app_name = 'users'
 
 urlpatterns = [
     path(
-        'signup/',
-        views.signup,
-        name='signup',
+        'signup/user',
+        views.signup_for_user,
+        name='signup_for_user',
+    ),
+    path(
+        'signup/shelter',
+        views.signup_for_shelter,
+        name='signup_for_shelter',
     ),
     path(
         'profile/',
