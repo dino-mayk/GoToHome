@@ -5,14 +5,12 @@ from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 
+from core.models import update_attrs
 from posts.models import Favourites, Posts
-from users.forms import (CustomShelterProfileForm, CustomUserProfileForm,
-                         CustomUserSignUpForm, CustomShelterSignUpForm,
+from users.forms import (CustomShelterProfileForm, CustomShelterSignUpForm,
+                         CustomUserProfileForm, CustomUserSignUpForm,
                          LoginForm, PasswordChange)
 from users.models import CustomUser
-
-from core.models import update_attrs
-
 
 
 class Login(LoginView):

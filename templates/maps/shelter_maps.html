@@ -1,34 +1,10 @@
+{% extends 'base.html' %}
+
 {% load i18n static djeymtags %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
-  <!-- START VENDORS CSS -->
-  <!-- Roboto Font:
-        Usage (css):
-          font-size: 16px;
-          font-family: Roboto, sans-serif !important;
-          font-weight: 100|300|400|500|700|900;
-          font-style: italic!important; -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-  <!-- Material Design Icons:
-        url: https://materialdesignicons.com/
-        Usage (html):
-          <span class="mdi mdi-name"></span>
-          Size: mdi-18px|mdi-24px|mdi-36px|mdi-48px or font-size: 16px;
-          Rotate: mdi-rotate-45|mdi-rotate-90|mdi-rotate-135|mdi-rotate-180|mdi-rotate-225|mdi-rotate-270|mdi-rotate-315
-          Flip: mdi-flip-h|mdi-flip-v
-          Color: mdi-light|mdi-light mdi-inactive|mdi-dark|mdi-dark mdi-inactive or color: #212121; -->
-  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
-  <!-- END VENDORS CSS -->
-</head>
-
-<body>
+{% block content %}
 
   <style type="text/css">
     .djeym-button {
@@ -68,5 +44,4 @@
 
   {% djeym_yandex_map slug='priiuty-perm' lang=request.LANGUAGE_CODE %}
   <!-- END VENDORS JS -->
-</body>
-</html>
+{% endblock content %}

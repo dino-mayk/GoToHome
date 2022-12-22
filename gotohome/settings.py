@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
     'core.apps.CoreConfig',
+    'maps.apps.MapsConfig',
     'chat.apps.ChatConfig',
     'daphne',
     'grappelli',
