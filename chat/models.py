@@ -20,5 +20,5 @@ class Message(models.Model):
         ordering = (
             'date_added',
         )
-        verbose_name = 'Сообщение'
-        verbose_name_plural = 'Сообщения'
+        verbose_name = 'сообщение'
+        verbose_name_plural = 'сообщения'

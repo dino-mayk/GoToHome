@@ -1,11 +1,11 @@
 from django.contrib import messages
-from django.shortcuts import redirect, render
 from django.core.mail import send_mail
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.shortcuts import redirect, render
 from djeym.models import Placemark
-from gotohome.settings import EMAIL_HOST_USER
 
+from gotohome.settings import EMAIL_HOST_USER
 from users.models import CustomUser
 
 

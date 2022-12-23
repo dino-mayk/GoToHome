@@ -20,7 +20,7 @@
         {% endif %}
         <div class="dropdown">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{ user.get_img.url }}" alt="mdo" class="rounded-circle" width="32" height="32">
+            <img src="{{ user.avatar.url }}" alt="mdo" class="rounded-circle" width="32" height="32">
           </a>
           <ul class="dropdown-menu text-center">
             <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>            
@@ -31,17 +31,16 @@
       </div>
     {% else %}
       <div class="user">
-        <a class="btn btn-outline-light m-1" href="{% url 'users:login' %}">Войти</a>
-            <div class="btn-group">
-              <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Зарегистрироваться
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="btn btn-warning" href="{% url 'users:signup_for_user' %}">Я пользователь</a></li>
-                <li><a class="btn btn-warning" href="{% url 'users:signup_for_shelter' %}">Я приют</a></li>
-              </ul>
-            </div>
-
+        <div class="btn-group">
+          <a class="btn btn-outline-light m-1" href="{% url 'users:login' %}">Войти</a>
+          <a type="button" class="btn btn-warning dropdown-toggle m-1" data-bs-toggle="dropdown" aria-expanded="false">
+            Зарегистрироваться
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item btn btn-warning" href="{% url 'users:signup_for_user' %}">Я пользователь</a></li>
+            <li><a class="dropdown-item btn btn-warning" href="{% url 'users:signup_for_shelter' %}">Я приют</a></li>
+          </ul>
+        </div>        
       </div>
     {% endif %}
   </div>
