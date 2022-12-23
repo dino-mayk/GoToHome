@@ -9,11 +9,11 @@ from users.managers import UserManager
 
 class CustomUser(AbstractUser):
     username = models.CharField(
-        'Имя пользователя',
+        'имя пользователя',
         max_length=150,
     )
     email = models.EmailField(
-        'Email',
+        'email',
         unique=True,
     )
     IS_SHELTER_TYPES = [
@@ -21,12 +21,12 @@ class CustomUser(AbstractUser):
         (True, 'Приют'),
     ]
     is_shelter = models.BooleanField(
-        verbose_name='Приют или посетитель',
+        verbose_name='приют или посетитель',
         choices=IS_SHELTER_TYPES,
         default=False,
     )
     phone_number = models.CharField(
-        'Номер телефона',
+        'номер телефона',
         max_length=17,
     )
     address = models.CharField(
@@ -35,12 +35,12 @@ class CustomUser(AbstractUser):
         default='ваш адресс'
     )
     about = models.TextField(
-        'О приюте',
+        'о приюте',
         default='ваша информация о приюте'
     )
     avatar = models.ImageField(
         upload_to='uploads/avatars/%Y/%m',
-        verbose_name='Аватар',
+        verbose_name='аватар',
         help_text='загрузите картинку',
         default='default_avatar.jpg',
     )
