@@ -13,13 +13,11 @@ class PostsManager(models.Manager):
 
 class FavManager(models.Manager):
     def get_user_and_post(self, user, post):
-        return self.filter(
-            models.Q(user=user) & models.Q(post=post),
-        )
+        return self.filter(user=user) & self.filter(post=post)
 
     def get_user_fav_posts(self, user):
         post_ids = set(
-            i['post_id'] for i in self.filter(
+            post['post_id'] for post in self.filter(
                 user_id=user).values('post_id').distinct()
         )
         return post_ids
