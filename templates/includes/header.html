@@ -20,7 +20,7 @@
         {% endif %}
         <div class="dropdown">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{ user.get_img.url }}" alt="mdo" class="rounded-circle" width="32" height="32">
+            <img src="{{ user.avatar.url }}" alt="mdo" class="rounded-circle" width="32" height="32">
           </a>
           <ul class="dropdown-menu text-center">
             <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>            
