@@ -5,6 +5,7 @@ class PostsManager(models.Manager):
     def homepage(self):
         return (
             self.get_queryset()
+                .filter(status=True)
                 .select_related('user')
                 .order_by('title')
         )

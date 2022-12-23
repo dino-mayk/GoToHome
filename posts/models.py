@@ -38,10 +38,19 @@ class Posts(models.Model):
         (2, 'Собака'),
         (3, 'Другое'),
     ]
+    STATUS_TYPES = [
+        (True, 'Пост активен'),
+        (False, 'Пост приостановлен'),
+    ]
     animal_type = models.PositiveSmallIntegerField(
         verbose_name='Тип животного',
         choices=ANIMAL_TYPES,
         default=3,
+    )
+    status = models.BooleanField(
+        verbose_name='Статус поста',
+        choices=STATUS_TYPES,
+        default=True,
     )
     objects = PostsManager()
 
