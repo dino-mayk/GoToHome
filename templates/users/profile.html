@@ -6,7 +6,7 @@
 <div class="container my-4 text-center">
   <div class="card my-2">
     <div class="card-body">
-      {{ user.img_tmb }}
+      <img src="{{ user.avatar.url }}" with="300px" height="300px">
       <div class="container">
         {% csrf_token %}
         <form method="post" enctype="multipart/form-data">

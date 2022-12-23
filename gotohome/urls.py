@@ -63,6 +63,13 @@ urlpatterns = [
             namespace='djeym',
         ),
     ),
+    path(
+        'maps/',
+        include(
+            'maps.urls',
+            namespace='name',
+        ),
+    ),
 ]
 
 if settings.DEBUG:
