@@ -33,6 +33,11 @@ class Posts(models.Model):
         help_text='загрузите картинку',
         null=True,
     )
+    ANIMAL_COLORS = [
+        (1, 'Серая'),
+        (2, 'Чёрная'),
+        (3, 'Белая'),
+    ]
     ANIMAL_TYPES = [
         (1, 'Кошка'),
         (2, 'Собака'),
@@ -42,6 +47,11 @@ class Posts(models.Model):
         (True, 'Пост активен'),
         (False, 'Пост приостановлен'),
     ]
+    color = models.PositiveSmallIntegerField(
+        verbose_name='цвет животного',
+        choices=ANIMAL_COLORS,
+        default=1,
+    )
     animal_type = models.PositiveSmallIntegerField(
         verbose_name='тип животного',
         choices=ANIMAL_TYPES,
