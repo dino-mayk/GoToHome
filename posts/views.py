@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
 from core.models import update_attrs
-from posts.forms import PostsForms
+from posts.forms import AddDogForm, AddCatForm, AddOtherForm
 from posts.models import Favourites, Posts
 
 
@@ -40,18 +40,37 @@ def post_details(request, pk):
     return render(request, template_name, context)
 
 
-def add_post(request):
+def add_post(request, post_type):
     if not request.user.is_shelter:
         return redirect('posts:posts_list')
-    form = PostsForms(request.POST, request.FILES,)
+    print(Posts.animal_type.field.name)
+    if post_type == 'cat':
+        form = AddCatForm(request.POST, request.FILES)
+
+    elif post_type == 'dog':
+        form = AddDogForm(request.POST, request.FILES)
+
+    else:
+        form = AddOtherForm(request.POST, request.FILES,
+                            initial={Posts.animal_type.field.name: 3})
+
     template_name = 'posts/add_post.html'
     context = {
         'form': form,
     }
     if request.method == 'POST' and form.is_valid():
+        cleaned_data = form.cleaned_data
+
+        if post_type == 'cat':
+            cleaned_data['animal_type'] = 1
+        elif post_type == 'dog':
+            cleaned_data['animal_type'] = 2
+        else:
+            cleaned_data['animal_type'] = 3
+        print(cleaned_data)
         new_post = Posts.objects.create(
             user=request.user,
-            **form.cleaned_data
+            **cleaned_data
         )
         new_post.save()
         messages.success(request, 'Ваш пост был успешно создан')
@@ -61,11 +80,24 @@ def add_post(request):
 
 def edit_post(request, pk):
     curr_post = get_object_or_404(Posts, pk=pk)
-    form = PostsForms(
-        data=request.POST,
-        files=request.FILES,
-        instance=curr_post
-    )
+    if curr_post.animal_type == 1:
+        form = AddCatForm(
+            data=request.POST,
+            files=request.FILES,
+            instance=curr_post
+        )
+    elif curr_post.animal_type == 2:
+        form = AddDogForm(
+            data=request.POST,
+            files=request.FILES,
+            instance=curr_post
+        )
+    else:
+        form = AddOtherForm(
+            data=request.POST,
+            files=request.FILES,
+            instance=curr_post
+        )
     template_name = 'posts/edit_post.html'
     context = {
         'form': form,

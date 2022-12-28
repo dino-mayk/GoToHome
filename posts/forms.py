@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from posts.models import Posts
 
 
-class PostsForms(ModelForm):
+class AddCatForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -13,18 +13,117 @@ class PostsForms(ModelForm):
     class Meta:
         model = Posts
         fields = (
-            Posts.title.field.name,
-            Posts.text.field.name,
-            Posts.age.field.name,
-            Posts.photo.field.name,
-            Posts.animal_type.field.name,
-            Posts.status.field.name,
+            'title',
+            'text',
+            'photo',
+            'status',
+
+            'cat_color',
+            'cat_breed',
+            'gender',
+            'wool_type',
+            'socialization',
+            'health',
+            'age',
         )
-        labels = {
-            Posts.title.field.name: 'Заголовок',
-            Posts.text.field.name: 'Текст',
-            Posts.age.field.name: 'Возраст животного',
-            Posts.photo.field.name: 'Фото',
-            Posts.animal_type.field.name: 'Тип животного',
-            Posts.status.field.name: 'Статус поста',
-        }
+
+
+class AddDogForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Posts
+        fields = (
+            'title',
+            'text',
+            'photo',
+            'status',
+
+            'dog_color',
+            'gender',
+            'size',
+            'wool_type',
+            'socialization',
+            'health',
+            'age',
+        )
+
+
+class AddOtherForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Posts
+        fields = (
+            'title',
+            'text',
+            'photo',
+            'status',
+
+            'other_animal_type',
+        )
+
+
+class CatFilterForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Posts
+
+        fields = (
+            'cat_color',
+            'cat_breed',
+            'gender',
+            'wool_type',
+            'socialization',
+            'health',
+            'age',
+        )
+
+
+class DogFilterForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Posts
+
+        fields = (
+            'dog_color',
+            'gender',
+            'size',
+            'wool_type',
+            'socialization',
+            'health',
+            'age',
+        )
+
+
+class OtherFilterForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Posts
+
+        fields = (
+            'other_animal_type',
+        )

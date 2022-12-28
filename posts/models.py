@@ -15,48 +15,176 @@ class Posts(models.Model):
         verbose_name='автор',
         help_text='выберете пользователя',
     )
+
     title = models.CharField(
-        'Заголовок',
+        'заголовок',
         max_length=150,
     )
     text = HTMLField(
         verbose_name='описание',
         help_text='введите ваше описание поста',
     )
-    age = models.PositiveSmallIntegerField(
-        verbose_name='возраст',
-        default=0,
-    )
+
     photo = models.ImageField(
         upload_to='uploads/preview/%Y/%m',
         verbose_name='картинка',
         help_text='загрузите картинку',
         null=True,
     )
-    ANIMAL_COLORS = [
-        (1, 'Серая'),
-        (2, 'Чёрная'),
-        (3, 'Белая'),
-    ]
+
     ANIMAL_TYPES = [
         (1, 'Кошка'),
         (2, 'Собака'),
         (3, 'Другое'),
     ]
+
+    CAT_COLORS = [
+        (1, 'белый'),
+        (2, 'серый'),
+        (3, 'рыжий'),
+        (4, 'черный'),
+        (5, 'черепаховый'),
+        (6, 'трехцветный'),
+        (7, 'бело-черный'),
+        (8, 'бело-рыжий'),
+        (9, 'бело-серый'),
+        (10, 'рыже-черный'),
+    ]
+
+    DOG_COLORS = [
+        (2, 'белый'),
+        (3, 'серый'),
+        (4, 'рыжий'),
+        (5, 'черный'),
+        (6, 'черепаховый'),
+        (7, 'трехцветный'),
+        (8, 'бело-черный'),
+        (9, 'бело-рыжий'),
+        (10, 'бело-серый'),
+        (11, 'рыже-черный'),
+    ]
+
+    WOOL_TYPES = [
+        (1, 'короткошерстная'),
+        (3, 'среднешерстная'),
+        (2, 'длинношерстная'),
+    ]
+
+    AGE_RANGES = [
+        (1, 'до 1 года'),
+        (2, 'от 1 до 2 лет'),
+        (3, 'от 2 до 5 лет'),
+        (4, 'от 5 до 8 лет'),
+        (5, 'от 8-11 лет'),
+        (6, 'свыше 11 лет'),
+    ]
+
+    CAT_BREEDS = [
+        (1, 'породистый'),
+        (2, 'без породы'),
+    ]
+
+    SOCIALIZATION_LEVEL = [
+        (1, 'высокая'),
+        (2, 'средняя'),
+        (3, 'низкая'),
+    ]
+
+    HEALTH_CONDITIONS = [
+        (1, 'без особенностей'),
+        (2, 'с особенностями'),
+    ]
+
+    GENDERS = [
+        (1, 'мужской'),
+        (2, 'женский'),
+    ]
+
+    DOG_SIZES = [
+        (1, 'мелкий'),
+        (2, 'средний'),
+        (3, 'крупный'),
+    ]
+
+    OTHER_ANIMALS_TYPES = [
+        (1, 'хомяк'),
+        (2, 'кролик'),
+        (3, 'морская свинка'),
+        (4, 'птицы'),
+        (5, 'змеи'),
+    ]
+
     STATUS_TYPES = [
         (True, 'Пост активен'),
         (False, 'Пост приостановлен'),
     ]
-    color = models.PositiveSmallIntegerField(
-        verbose_name='цвет животного',
-        choices=ANIMAL_COLORS,
-        default=1,
-    )
+
     animal_type = models.PositiveSmallIntegerField(
         verbose_name='тип животного',
         choices=ANIMAL_TYPES,
         default=3,
     )
+
+    cat_color = models.PositiveSmallIntegerField(
+        verbose_name='цвет кошки',
+        choices=CAT_COLORS,
+        default=1,
+    )
+
+    dog_color = models.PositiveSmallIntegerField(
+        verbose_name='цвет собаки',
+        choices=DOG_COLORS,
+        default=1,
+    )
+
+    age = models.PositiveSmallIntegerField(
+        verbose_name='возраст',
+        choices=AGE_RANGES,
+        default=1,
+    )
+
+    cat_breed = models.PositiveSmallIntegerField(
+        verbose_name='порода кошки',
+        choices=DOG_COLORS,
+        default=1,
+    )
+
+    size = models.PositiveSmallIntegerField(
+        verbose_name='размер животного',
+        choices=DOG_SIZES,
+        default=1,
+    )
+
+    gender = models.PositiveSmallIntegerField(
+        verbose_name='пол животного',
+        choices=GENDERS,
+        default=1,
+    )
+
+    wool_type = models.PositiveSmallIntegerField(
+        verbose_name='тип шерсти',
+        choices=WOOL_TYPES,
+        default=1,
+    )
+
+    socialization = models.PositiveSmallIntegerField(
+        verbose_name='уровень социализации',
+        choices=SOCIALIZATION_LEVEL,
+        default=1,
+    )
+
+    health = models.PositiveSmallIntegerField(
+        verbose_name='состояние здоровья',
+        choices=HEALTH_CONDITIONS,
+        default=1,
+    )
+
+    other_animal_type = models.PositiveSmallIntegerField(
+        verbose_name='тип животного',
+        choices=OTHER_ANIMALS_TYPES,
+        default=1,
+    )
+
     status = models.BooleanField(
         verbose_name='статус поста',
         choices=STATUS_TYPES,
@@ -85,6 +213,7 @@ class Posts(models.Model):
 
     def sorl_delete(**kwargs):
         delete(kwargs['file'])
+
     cleanup_pre_delete.connect(sorl_delete)
 
     def __str__(self):

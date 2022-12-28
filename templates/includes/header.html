@@ -12,14 +12,19 @@
       </div>
     </nav>
     {% if user.is_authenticated %}
-      <div class="user d-flex">
+      <div class="post d-flex">
         {% if user.is_shelter %}
-          <a href="{% url 'posts:add_post' %}">
-              <img class="plus p-3" src="{% static 'bootstrap/icons/plus-lg.svg' %}">
+            <a type="button" class="btn btn-warning dropdown-toggle m-2" data-bs-toggle="dropdown" aria-expanded="false">
+            Добавить пост
           </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item btn btn-warning" href="{% url 'posts:add_post' 'dog' %}">Собака</a></li>
+            <li><a class="dropdown-item btn btn-warning" href="{% url 'posts:add_post' 'cat' %}">Кошка</a></li>
+            <li><a class="dropdown-item btn btn-warning" href="{% url 'posts:add_post' 'other' %}">Другое</a></li>
+          </ul>
         {% endif %}
         <div class="dropdown">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle m-2" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="{{ user.avatar.url }}" alt="mdo" class="rounded-circle" width="32" height="32">
           </a>
           <ul class="dropdown-menu text-center">
