@@ -2,11 +2,12 @@
 
 
 <div class="container text-center">
-    <div class="row m-5">
+    <div class="row m-5" style="display: flex; justify-content: space-around">
         <div class='col-lg-4 col-md-6 col-sm-12'>
             <img src="{{ post.photo.url }}" width="300" height="auto">
+            <p class="card-text" style="">{{ post.text | safe }}</p>
         </div>
-        <div class='col-lg-4 col-md-6 col-sm-12'>
+        <div class='col-lg-4 col-md-6 col-sm-12' style="text-align: left;">
             {% if post.status == True%}
                 <h4><span class="badge bg-primary">Пост активен</span></h4>
             {% else %}
@@ -16,16 +17,16 @@
             <p>
                 Приют: <a class="card-text" href="{% url 'users:shelter_profile' user.id %}">{{ user.username }}</a>
             </p>
-            {% if post.animal_type == 1 %}
+            {% if post.animal_type == 'Кошка' %}
                 <p class="card-text"><b>Возраст животного</b>: {{ post.age }}</p>
                 <p class="card-text"><b>Цвет</b>: {{ post.cat_color }}</p>
                 <p class="card-text"><b>Шерсть</b>: {{ post.wool_type }}</p>
                 <p class="card-text"><b>Пол</b>: {{ post.gender }}</p>
                 <p class="card-text"><b>Уровень социализации</b>: {{ post.socialization }}</p>
                 <p class="card-text"><b>Породистость</b>: {{ post.cat_breed }}</p>
-                <p class="card-text">Состояние здоровья: {{ post.health }}</p>
+                <p class="card-text"><b>Состояние здоровья</b>: {{ post.health }}</p>
 
-            {% elif post.animal_type == 2 %}
+            {% elif post.animal_type == 'Собака' %}
                 <p class="card-text"><b>Цвет: </b>{{ post.dog_color }}</p>
                 <p class="card-text"><b>Возраст: </b>{{ post.age }}</p>
                 <p class="card-text"><b>Размер: </b>{{ post.size }}</p>
@@ -37,7 +38,7 @@
                 <p class="card-text"><b>Вид животного</b>: {{ post.other_animal_type }}</p>
             {% endif %}
 
-            <p class="card-text" >{{ post.text | safe }}</p>
+
 
             <form method="POST">
                 {% csrf_token %}

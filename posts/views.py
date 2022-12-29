@@ -40,7 +40,7 @@ def post_details(request, pk):
     for field in Posts._meta.get_fields():
         if hasattr(field, 'choices') and field.choices is not None:
             post_dict[field.name] = dict(field.choices)[post_dict[field.name]]
-
+    print(post_dict)
     context = {
         'post': post_dict,
         'user': curr_post_user,
