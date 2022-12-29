@@ -144,12 +144,15 @@
         </div>
       </div>
     </div>
-
-    <div class="row text-center">
-      {% for post in posts %}
-            {% include "includes/small_post_card.html" with post=post  %}
-      {% endfor %}
-    </div>
+    {% if posts %}
+        <div class="row text-center">
+          {% for post in posts %}
+                {% include "includes/small_post_card.html" with post=post  %}
+          {% endfor %}
+        </div>
+    {% else %}
+        <h2 class="text-center m-5">Ничего не найдено</h2>
+    {% endif %}
     
 </div>
 {% endblock %}

@@ -53,16 +53,16 @@ class Posts(models.Model):
     ]
 
     DOG_COLORS = [
-        (2, 'белый'),
-        (3, 'серый'),
-        (4, 'рыжий'),
-        (5, 'черный'),
-        (6, 'черепаховый'),
-        (7, 'трехцветный'),
-        (8, 'бело-черный'),
-        (9, 'бело-рыжий'),
-        (10, 'бело-серый'),
-        (11, 'рыже-черный'),
+        (1, 'белый'),
+        (2, 'серый'),
+        (3, 'рыжий'),
+        (4, 'черный'),
+        (5, 'черепаховый'),
+        (6, 'трехцветный'),
+        (7, 'бело-черный'),
+        (8, 'бело-рыжий'),
+        (9, 'бело-серый'),
+        (10, 'рыже-черный'),
         (100, '---'),
     ]
 
@@ -138,61 +138,61 @@ class Posts(models.Model):
     cat_color = models.PositiveSmallIntegerField(
         verbose_name='цвет кошки',
         choices=CAT_COLORS,
-        default=1,
+        default=100,
     )
 
     dog_color = models.PositiveSmallIntegerField(
         verbose_name='цвет собаки',
         choices=DOG_COLORS,
-        default=1,
+        default=100,
     )
 
     age = models.PositiveSmallIntegerField(
         verbose_name='возраст',
         choices=AGE_RANGES,
-        default=1,
+        default=100,
     )
 
     cat_breed = models.PositiveSmallIntegerField(
         verbose_name='порода кошки',
-        choices=DOG_COLORS,
-        default=1,
+        choices=CAT_BREEDS,
+        default=100,
     )
 
     size = models.PositiveSmallIntegerField(
         verbose_name='размер животного',
         choices=DOG_SIZES,
-        default=1,
+        default=100,
     )
 
     gender = models.PositiveSmallIntegerField(
         verbose_name='пол животного',
         choices=GENDERS,
-        default=1,
+        default=100,
     )
 
     wool_type = models.PositiveSmallIntegerField(
         verbose_name='тип шерсти',
         choices=WOOL_TYPES,
-        default=1,
+        default=100,
     )
 
     socialization = models.PositiveSmallIntegerField(
         verbose_name='уровень социализации',
         choices=SOCIALIZATION_LEVEL,
-        default=1,
+        default=100,
     )
 
     health = models.PositiveSmallIntegerField(
         verbose_name='состояние здоровья',
         choices=HEALTH_CONDITIONS,
-        default=1,
+        default=100,
     )
 
     other_animal_type = models.PositiveSmallIntegerField(
         verbose_name='тип животного',
         choices=OTHER_ANIMALS_TYPES,
-        default=1,
+        default=100,
     )
 
     status = models.BooleanField(

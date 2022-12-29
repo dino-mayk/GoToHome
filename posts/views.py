@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
+from django.forms.models import model_to_dict
 
 from core.models import update_attrs
 from posts.forms import AddCatForm, AddDogForm, AddOtherForm
@@ -17,8 +18,8 @@ def posts_list(request):
 
 def post_details(request, pk):
     template_name = 'posts/post_detail.html'
-    post = Posts.objects.get(pk=pk)
     curr_post = Posts.objects.get(pk=pk)
+    curr_post_user = curr_post.user
     fav = Favourites.objects.get_user_and_post(
         user=request.user,
         post=curr_post,
@@ -33,8 +34,16 @@ def post_details(request, pk):
                 post=curr_post,
             )
             messages.info(request, 'Добавлено в избранные')
+
+    post_dict = model_to_dict(curr_post, fields=[field.name for field in curr_post._meta.fields])
+
+    for field in Posts._meta.get_fields():
+        if hasattr(field, 'choices') and field.choices is not None:
+            post_dict[field.name] = dict(field.choices)[post_dict[field.name]]
+
     context = {
-        'post': post,
+        'post': post_dict,
+        'user': curr_post_user,
         'is_fav': fav.exists(),
     }
     return render(request, template_name, context)
