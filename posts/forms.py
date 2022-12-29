@@ -17,7 +17,6 @@ class AddCatForm(ModelForm):
             'text',
             'photo',
             'status',
-
             'cat_color',
             'cat_breed',
             'gender',

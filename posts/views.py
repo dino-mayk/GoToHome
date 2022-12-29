@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
 from core.models import update_attrs
-from posts.forms import AddDogForm, AddCatForm, AddOtherForm
+from posts.forms import AddCatForm, AddDogForm, AddOtherForm
 from posts.models import Favourites, Posts
 
 
