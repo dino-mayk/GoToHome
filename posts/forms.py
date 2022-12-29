@@ -1,15 +1,8 @@
-from django.forms import ModelForm
-
 from posts.models import Posts
+from core.forms import AbstractModelForm
 
 
-class AddCatForm(ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
-
+class AddCatForm(AbstractModelForm):
     class Meta:
         model = Posts
         fields = (
@@ -27,13 +20,7 @@ class AddCatForm(ModelForm):
         )
 
 
-class AddDogForm(ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
-
+class AddDogForm(AbstractModelForm):
     class Meta:
         model = Posts
         fields = (
@@ -52,13 +39,7 @@ class AddDogForm(ModelForm):
         )
 
 
-class AddOtherForm(ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
-
+class AddOtherForm(AbstractModelForm):
     class Meta:
         model = Posts
         fields = (
@@ -71,13 +52,7 @@ class AddOtherForm(ModelForm):
         )
 
 
-class CatFilterForm(ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
-
+class CatFilterForm(AbstractModelForm):
     class Meta:
         model = Posts
 
@@ -92,13 +67,7 @@ class CatFilterForm(ModelForm):
         )
 
 
-class DogFilterForm(ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
-
+class DogFilterForm(AbstractModelForm):
     class Meta:
         model = Posts
 
@@ -113,13 +82,7 @@ class DogFilterForm(ModelForm):
         )
 
 
-class OtherFilterForm(ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
-
+class OtherFilterForm(AbstractModelForm):
     class Meta:
         model = Posts
 

@@ -10,6 +10,18 @@ class PostsManager(models.Manager):
                 .order_by('title')
         )
 
+    def dogfilter(self, *args, **kwargs):
+        print(kwargs)
+        return self.homepage().filter(
+            animal_type=2,
+            **kwargs)
+
+    def catfilter(self, *args, **kwargs):
+        return self.homepage().filter(animal_type=1)
+
+    def otherfilter(self, *args, **kwargs):
+        return self.homepage().filter(animal_type=3)
+
 
 class FavManager(models.Manager):
     def get_user_and_post(self, user, post):
@@ -21,3 +33,4 @@ class FavManager(models.Manager):
                 user_id=user).values('post_id').distinct()
         )
         return post_ids
+
