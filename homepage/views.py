@@ -11,15 +11,31 @@ def home(request):
 
     if request.method == 'POST':
         if 'dog_color' in request.POST and dog_form.is_valid():
-            posts = Posts.objects.dogfilter(**dog_form.cleaned_data)
+
+            filter_dict = {}
+            for value in dog_form.cleaned_data:
+                if dog_form.cleaned_data[value] != 100:
+                    filter_dict[value] = dog_form.cleaned_data[value]
+
+            posts = Posts.objects.dogfilter(**filter_dict)
 
         elif 'cat_color' in request.POST and cat_form.is_valid():
 
-            posts = Posts.objects.catfilter()
+            filter_dict = {}
+            for value in cat_form.cleaned_data:
+                if cat_form.cleaned_data[value] != 100:
+                    filter_dict[value] = cat_form.cleaned_data[value]
 
-        elif 'other_color' in request.POST and other_form.is_valid():
+            posts = Posts.objects.catfilter(**cat_form.cleaned_data)
 
-            posts = Posts.objects.otherfilter()
+        elif 'other_animal_type' in request.POST and other_form.is_valid():
+
+            filter_dict = {}
+            for value in other_form.cleaned_data:
+                if other_form.cleaned_data[value] != 100:
+                    filter_dict[value] = other_form.cleaned_data[value]
+
+            posts = Posts.objects.otherfilter(**other_form.cleaned_data)
     else:
         posts = Posts.objects.homepage()
 

@@ -47,7 +47,6 @@ class AddOtherForm(AbstractModelForm):
             'text',
             'photo',
             'status',
-
             'other_animal_type',
         )
 
