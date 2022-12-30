@@ -18,8 +18,8 @@
             Добавить пост
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item btn btn-warning" href="{% url 'posts:add_post' 'dog' %}">Собака</a></li>
             <li><a class="dropdown-item btn btn-warning" href="{% url 'posts:add_post' 'cat' %}">Кошка</a></li>
+            <li><a class="dropdown-item btn btn-warning" href="{% url 'posts:add_post' 'dog' %}">Собака</a></li>
             <li><a class="dropdown-item btn btn-warning" href="{% url 'posts:add_post' 'other' %}">Другое</a></li>
           </ul>
         {% endif %}

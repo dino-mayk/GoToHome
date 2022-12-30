@@ -26,6 +26,16 @@ class PostsManager(models.Manager):
             **kwargs)
 
 
+class PostsGalleryManager(models.Manager):
+    def post_gallery(self, item_id):
+        return (
+            self.get_queryset()
+                .filter(item__id=item_id)
+                .select_related('item')
+                .order_by('item')
+        )
+
+
 class FavManager(models.Manager):
     def get_user_and_post(self, user, post):
         return self.filter(user=user) & self.filter(post=post)

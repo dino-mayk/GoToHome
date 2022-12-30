@@ -1,5 +1,7 @@
-from posts.models import Posts
+from django.forms import ClearableFileInput
+
 from core.forms import AbstractModelForm
+from posts.models import Posts
 
 
 class AddCatForm(AbstractModelForm):
@@ -9,6 +11,7 @@ class AddCatForm(AbstractModelForm):
             'title',
             'text',
             'photo',
+            'gallery',
             'status',
             'cat_color',
             'cat_breed',
@@ -18,6 +21,9 @@ class AddCatForm(AbstractModelForm):
             'health',
             'age',
         )
+        widgets = {
+            'gallery': ClearableFileInput(attrs={'multiple': True}),
+        }
 
 
 class AddDogForm(AbstractModelForm):
@@ -27,8 +33,8 @@ class AddDogForm(AbstractModelForm):
             'title',
             'text',
             'photo',
+            'gallery',
             'status',
-
             'dog_color',
             'gender',
             'size',
@@ -37,6 +43,9 @@ class AddDogForm(AbstractModelForm):
             'health',
             'age',
         )
+        widgets = {
+            'gallery': ClearableFileInput(attrs={'multiple': True}),
+        }
 
 
 class AddOtherForm(AbstractModelForm):
@@ -46,9 +55,13 @@ class AddOtherForm(AbstractModelForm):
             'title',
             'text',
             'photo',
+            'gallery',
             'status',
             'other_animal_type',
         )
+        widgets = {
+            'gallery': ClearableFileInput(attrs={'multiple': True}),
+        }
 
 
 class CatFilterForm(AbstractModelForm):

@@ -1,10 +1,10 @@
 from django.contrib import messages
-from django.shortcuts import get_object_or_404, redirect, render
 from django.forms.models import model_to_dict
+from django.shortcuts import get_object_or_404, redirect, render
 
 from core.models import update_attrs
 from posts.forms import AddCatForm, AddDogForm, AddOtherForm
-from posts.models import Favourites, Posts
+from posts.models import Favourites, Posts, PostsGallery
 
 
 def posts_list(request):
@@ -19,6 +19,7 @@ def posts_list(request):
 def post_details(request, pk):
     template_name = 'posts/post_detail.html'
     curr_post = Posts.objects.get(pk=pk)
+    curr_post_gallery = PostsGallery.objects.post_gallery(item_id=pk)
     curr_post_user = curr_post.user
     fav = Favourites.objects.get_user_and_post(
         user=request.user,
@@ -47,6 +48,7 @@ def post_details(request, pk):
     context = {
         'post': post_dict,
         'user': curr_post_user,
+        'post_gallery': curr_post_gallery,
         'is_fav': fav.exists(),
     }
     return render(request, template_name, context)
@@ -64,7 +66,6 @@ def add_post(request, post_type):
     else:
         form = AddOtherForm(request.POST, request.FILES,
                             initial={Posts.animal_type.field.name: 3})
-
     template_name = 'posts/add_post.html'
     context = {
         'form': form,
@@ -83,6 +84,15 @@ def add_post(request, post_type):
             **cleaned_data
         )
         new_post.save()
+
+        files = request.FILES.getlist('gallery')
+        for img in files:
+            new_gallery = PostsGallery.objects.create(
+                item=new_post,
+                upload=img,
+            )
+            new_gallery.save()
+
         messages.success(request, 'Ваш пост был успешно создан')
         return redirect('users:profile')
     return render(request, template_name, context)

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Favourites, Posts
+from posts.models import Favourites, Posts, PostsGallery
 
 
 @admin.register(Posts)
@@ -10,6 +10,14 @@ class AdminPosts(admin.ModelAdmin):
         'user',
         'img_tmb',
         'animal_type',
+    ]
+
+
+@admin.register(PostsGallery)
+class AdminPostsGallery(admin.ModelAdmin):
+    list_display = [
+        'item',
+        'img_tmb',
     ]
 
 
