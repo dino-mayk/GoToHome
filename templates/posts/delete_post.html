@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="conteainer text-center">
+<div class="container text-center">
     <h2>Вы уверены, что хотите удалить свой пост "{{ post.title }}"?</h2>
     <form method="post">
         {% csrf_token %}
