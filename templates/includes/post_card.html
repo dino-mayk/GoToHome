@@ -3,7 +3,7 @@
 
 <div class="container text-center m-5 mx-auto">
     <div class="row">
-        <div class='col-lg-4 col-md-6 col-sm-12'>
+        <div class="col-lg-4 col-md-6 col-sm-12">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-indicators">
                   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -32,8 +32,8 @@
             </div>
             <p class="card-text">{{ post.text | safe }}</p>
         </div>
-        <div class='col-lg-4 col-md-6 col-sm-12'>
-            <h5>{{ post.title }}</h5>
+        <div class="col-lg-4 col-md-6 col-sm-12" style="text-align:left;">
+            <h2 class="text-center">{{ post.title }}</h2>
             <p><b>Приют: </b><a class="card-text" href="{% url 'users:shelter_profile' user.id %}">{{ user.username }}</a></p>
 
             {% if post.animal_type == 'Кошка' %}
