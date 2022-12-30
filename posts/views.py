@@ -35,12 +35,15 @@ def post_details(request, pk):
             )
             messages.info(request, 'Добавлено в избранные')
 
-    post_dict = model_to_dict(curr_post, fields=[field.name for field in curr_post._meta.fields])
+    post_dict = model_to_dict(
+        curr_post,
+        fields=[field.name for field in curr_post._meta.fields]
+    )
 
     for field in Posts._meta.get_fields():
         if hasattr(field, 'choices') and field.choices is not None:
             post_dict[field.name] = dict(field.choices)[post_dict[field.name]]
-    print(post_dict)
+
     context = {
         'post': post_dict,
         'user': curr_post_user,
@@ -52,7 +55,6 @@ def post_details(request, pk):
 def add_post(request, post_type):
     if not request.user.is_shelter:
         return redirect('posts:posts_list')
-    print(Posts.animal_type.field.name)
     if post_type == 'cat':
         form = AddCatForm(request.POST, request.FILES)
 
@@ -76,7 +78,6 @@ def add_post(request, post_type):
             cleaned_data['animal_type'] = 2
         else:
             cleaned_data['animal_type'] = 3
-        print(cleaned_data)
         new_post = Posts.objects.create(
             user=request.user,
             **cleaned_data
