@@ -99,7 +99,9 @@ def add_post(request, post_type):
 
 
 def edit_post(request, pk):
+    template_name = 'posts/edit_post.html'
     curr_post = get_object_or_404(Posts, pk=pk)
+
     if curr_post.animal_type == 1:
         form = AddCatForm(
             data=request.POST or None,
@@ -118,15 +120,29 @@ def edit_post(request, pk):
             files=request.FILES or None,
             instance=curr_post
         )
-    template_name = 'posts/edit_post.html'
+
     context = {
         'form': form,
     }
+
     if request.user.id != curr_post.user.id:
         messages.error(request, 'У вас нет доступа к чужому посту')
         return redirect('homepage:home')
     if request.method == 'POST' and form.is_valid():
         update_attrs(curr_post, **form.cleaned_data)
+
+        curr_post_gallery = PostsGallery.objects.post_gallery(item_id=pk)
+        for img in curr_post_gallery:
+            img.delete()
+
+        files = request.FILES.getlist('gallery')
+        for img in files:
+            new_gallery = PostsGallery.objects.create(
+                item=curr_post,
+                upload=img,
+            )
+            new_gallery.save()
+
         messages.success(request, 'Пост был успешно обновлен')
         return redirect('users:profile')
     return render(request, template_name, context)
