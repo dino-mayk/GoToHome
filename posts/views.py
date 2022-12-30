@@ -47,7 +47,7 @@ def post_details(request, pk):
 
     context = {
         'post': post_dict,
-        'user': curr_post_user,
+        'author': curr_post_user,
         'post_gallery': curr_post_gallery,
         'is_fav': fav.exists(),
     }
