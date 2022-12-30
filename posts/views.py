@@ -92,20 +92,20 @@ def edit_post(request, pk):
     curr_post = get_object_or_404(Posts, pk=pk)
     if curr_post.animal_type == 1:
         form = AddCatForm(
-            data=request.POST,
-            files=request.FILES,
+            data=request.POST or None,
+            files=request.FILES or None,
             instance=curr_post
         )
     elif curr_post.animal_type == 2:
         form = AddDogForm(
-            data=request.POST,
-            files=request.FILES,
+            data=request.POST or None,
+            files=request.FILES or None,
             instance=curr_post
         )
     else:
         form = AddOtherForm(
-            data=request.POST,
-            files=request.FILES,
+            data=request.POST or None,
+            files=request.FILES or None,
             instance=curr_post
         )
     template_name = 'posts/edit_post.html'
