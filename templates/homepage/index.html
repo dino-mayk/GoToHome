@@ -15,13 +15,13 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="{% static 'other/img/carousel1.jpg' %}" class="d-block" alt="Фото карусели">
+          <img src="{% static 'other/img/carousel1.jpg' %}" class="d-block rounded" alt="Фото карусели">
         </div>
         <div class="carousel-item">
-          <img src="{% static 'other/img/carousel2.jpg' %}" class="d-block" alt="Фото карусели">
+          <img src="{% static 'other/img/carousel2.jpg' %}" class="d-block rounded" alt="Фото карусели">
         </div>
         <div class="carousel-item">
-          <img src="{% static 'other/img/carousel3.jpg' %}" class="d-block" alt="Фото карусели">
+          <img src="{% static 'other/img/carousel3.jpg' %}" class="d-block rounded" alt="Фото карусели">
           <div class="carousel-caption text-start">
             <p>Листай вниз. Там интересно:)</p>
           </div>
@@ -36,21 +36,9 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-</div>
 
-
-<div class="container">
-    <div class="row m-2">
-      <div class="col-12">
-        <div id="djeym-app" class="djeym"></div>
-        <script type="text/javascript" src="{% static "djeym/js/jquery.min.js" %}"></script>
-        <script src="{% static "djeym/js/jquery-regex.min.js" %}"></script>
-        {% djeym_yandex_map slug='priiuty-perm' lang=request.LANGUAGE_CODE %}
-      </div>
-    </div>
-
-    <div class="text-center">
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    <div class="alert alert-dark text-center mt-5" role="alert">
+      <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Подобрать питомца
       </button>
 
@@ -147,6 +135,7 @@
         </div>
       </div>
     </div>
+
     {% if posts %}
         <div class="row text-center">
           {% for post in posts %}
@@ -156,6 +145,14 @@
     {% else %}
         <h2 class="text-center m-5">Ничего не найдено</h2>
     {% endif %}
-    
+
+    <div class="row m-2">
+      <div class="col-12">
+        <div id="djeym-app" class="djeym"></div>
+        <script type="text/javascript" src="{% static "djeym/js/jquery.min.js" %}"></script>
+        <script src="{% static "djeym/js/jquery-regex.min.js" %}"></script>
+        {% djeym_yandex_map slug='priiuty-perm' lang=request.LANGUAGE_CODE %}
+      </div>
+    </div>
 </div>
 {% endblock %}
