@@ -10,9 +10,4 @@ urlpatterns = [
         views.home,
         name='home',
     ),
-    path(
-        '<int:filter>',
-        views.home,
-        name='home',
-    ),
 ]

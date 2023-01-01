@@ -6,35 +6,38 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'other/css/index.css' %}">
 
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="{% static 'other/img/carousel1.jpg' %}" class="d-block" alt="Фото карусели">
-      <div class="carousel-caption text-start">
-        <p>Листай вниз. Там интересно:)</p>
+<div class="container">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{% static 'other/img/carousel1.jpg' %}" class="d-block" alt="Фото карусели">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'other/img/carousel2.jpg' %}" class="d-block" alt="Фото карусели">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'other/img/carousel3.jpg' %}" class="d-block" alt="Фото карусели">
+          <div class="carousel-caption text-start">
+            <p>Листай вниз. Там интересно:)</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <div class="carousel-item">
-      <img src="{% static 'other/img/carousel2.jpg' %}" class="d-block" alt="Фото карусели">
-    </div>
-    <div class="carousel-item">
-      <img src="{% static 'other/img/carousel3.jpg' %}" class="d-block" alt="Фото карусели">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
 </div>
+
 
 <div class="container">
     <div class="row m-2">
@@ -46,17 +49,113 @@
       </div>
     </div>
 
-    <nav class="nav nav-pills flex-column flex-sm-row">
-      {% for ind, type in animal_types %}
-        <a class="btn btn-warning flex-sm-fill text-sm-center m-5" aria-current="page" href="{% url 'homepage:home' ind %}">{{ type }}</a>
-      {% endfor %}
-    </nav>
+    <div class="text-center">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Подобрать питомца
+      </button>
 
-    <div class="row text-center">
-      {% for post in posts %}
-            {% include "includes/small_post_card.html" with post=post  %}
-      {% endfor %}
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Поиск</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col">
+                  <a class="btn btn-warning" aria-current="page" data-bs-toggle="modal" data-bs-target="#staticBackdropForCats">Кошек</a>
+                </div>
+                <div class="col">
+                  <a class="btn btn-warning" aria-current="page" data-bs-toggle="modal" data-bs-target="#staticBackdropForDogs">Собак</a>
+                </div>
+                <div class="col">
+                  <a class="btn btn-warning" aria-current="page" data-bs-toggle="modal" data-bs-target="#staticBackdropForOther">Другое</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="staticBackdropForCats" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Поиск</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% include 'includes/form.html' with form=cat_form %}
+                <div class="text-center m-2">
+                  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Назад
+                  </button>
+                  <button class="btn btn-primary" type="submit">Искать</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="staticBackdropForDogs" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Поиск</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% include 'includes/form.html' with form=dog_form %}
+                <div class="text-center m-2">
+                  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Назад
+                  </button>
+                  <button class="btn btn-primary"type="submit">Искать</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="staticBackdropForOther" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Поиск</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% include 'includes/form.html' with form=other_form %}
+                <div class="text-center m-2">
+                  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Назад
+                  </button>
+                  <button class="btn btn-primary" type="submit">Искать</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    {% if posts %}
+        <div class="row text-center">
+          {% for post in posts %}
+                {% include "includes/small_post_card.html" with post=post  %}
+          {% endfor %}
+        </div>
+    {% else %}
+        <h2 class="text-center m-5">Ничего не найдено</h2>
+    {% endif %}
     
 </div>
 {% endblock %}

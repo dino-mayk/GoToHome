@@ -1,30 +1,103 @@
-from django.forms import ModelForm
+from django.forms import FileInput
 
+from core.forms import AbstractModelForm
 from posts.models import Posts
 
 
-class PostsForms(ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
-
+class AddCatForm(AbstractModelForm):
     class Meta:
         model = Posts
         fields = (
-            Posts.title.field.name,
-            Posts.text.field.name,
-            Posts.age.field.name,
-            Posts.photo.field.name,
-            Posts.animal_type.field.name,
-            Posts.status.field.name,
+            'title',
+            'text',
+            'photo',
+            'gallery',
+            'status',
+            'cat_color',
+            'cat_breed',
+            'gender',
+            'wool_type',
+            'socialization',
+            'health',
+            'age',
         )
-        labels = {
-            Posts.title.field.name: 'Заголовок',
-            Posts.text.field.name: 'Текст',
-            Posts.age.field.name: 'Возраст животного',
-            Posts.photo.field.name: 'Фото',
-            Posts.animal_type.field.name: 'Тип животного',
-            Posts.status.field.name: 'Статус поста',
+        widgets = {
+            'gallery': FileInput(attrs={'multiple': True}),
         }
+
+
+class AddDogForm(AbstractModelForm):
+    class Meta:
+        model = Posts
+        fields = (
+            'title',
+            'text',
+            'photo',
+            'gallery',
+            'status',
+            'dog_color',
+            'gender',
+            'size',
+            'wool_type',
+            'socialization',
+            'health',
+            'age',
+        )
+        widgets = {
+            'gallery': FileInput(attrs={'multiple': True}),
+        }
+
+
+class AddOtherForm(AbstractModelForm):
+    class Meta:
+        model = Posts
+        fields = (
+            'title',
+            'text',
+            'photo',
+            'gallery',
+            'status',
+            'other_animal_type',
+        )
+        widgets = {
+            'gallery': FileInput(attrs={'multiple': True}),
+        }
+
+
+class CatFilterForm(AbstractModelForm):
+    class Meta:
+        model = Posts
+
+        fields = (
+            'cat_color',
+            'cat_breed',
+            'gender',
+            'wool_type',
+            'socialization',
+            'health',
+            'age',
+        )
+
+
+class DogFilterForm(AbstractModelForm):
+    class Meta:
+        model = Posts
+
+        fields = (
+            'dog_color',
+            'gender',
+            'size',
+            'wool_type',
+            'socialization',
+            'health',
+            'age',
+        )
+
+
+class OtherFilterForm(AbstractModelForm):
+    class Meta:
+        model = Posts
+
+        fields = (
+            'other_animal_type',
+        )

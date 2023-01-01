@@ -16,7 +16,7 @@ urlpatterns = [
         name='posts_detail',
     ),
     path(
-        'add_post/',
+        'add_post/<post_type>',
         views.add_post,
         name='add_post',
     ),

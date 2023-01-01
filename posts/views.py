@@ -1,9 +1,10 @@
 from django.contrib import messages
+from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404, redirect, render
 
 from core.models import update_attrs
-from posts.forms import PostsForms
-from posts.models import Favourites, Posts
+from posts.forms import AddCatForm, AddDogForm, AddOtherForm
+from posts.models import Favourites, Posts, PostsGallery
 
 
 def posts_list(request):
@@ -17,8 +18,9 @@ def posts_list(request):
 
 def post_details(request, pk):
     template_name = 'posts/post_detail.html'
-    post = Posts.objects.get(pk=pk)
     curr_post = Posts.objects.get(pk=pk)
+    curr_post_gallery = PostsGallery.objects.post_gallery(item_id=pk)
+    curr_post_user = curr_post.user
     fav = Favourites.objects.get_user_and_post(
         user=request.user,
         post=curr_post,
@@ -33,48 +35,115 @@ def post_details(request, pk):
                 post=curr_post,
             )
             messages.info(request, 'Добавлено в избранные')
+
+    post_dict = model_to_dict(
+        curr_post,
+        fields=[field.name for field in curr_post._meta.fields]
+    )
+
+    for field in Posts._meta.get_fields():
+        if hasattr(field, 'choices') and field.choices is not None:
+            post_dict[field.name] = dict(field.choices)[post_dict[field.name]]
+
     context = {
-        'post': post,
+        'post': post_dict,
+        'author': curr_post_user,
+        'post_gallery': curr_post_gallery,
         'is_fav': fav.exists(),
     }
     return render(request, template_name, context)
 
 
-def add_post(request):
+def add_post(request, post_type):
     if not request.user.is_shelter:
         return redirect('posts:posts_list')
-    form = PostsForms(request.POST, request.FILES,)
+    if post_type == 'cat':
+        form = AddCatForm(request.POST, request.FILES)
+
+    elif post_type == 'dog':
+        form = AddDogForm(request.POST, request.FILES)
+
+    else:
+        form = AddOtherForm(request.POST, request.FILES,
+                            initial={Posts.animal_type.field.name: 3})
     template_name = 'posts/add_post.html'
     context = {
         'form': form,
     }
     if request.method == 'POST' and form.is_valid():
+        cleaned_data = form.cleaned_data
+
+        if post_type == 'cat':
+            cleaned_data['animal_type'] = 1
+        elif post_type == 'dog':
+            cleaned_data['animal_type'] = 2
+        else:
+            cleaned_data['animal_type'] = 3
         new_post = Posts.objects.create(
             user=request.user,
-            **form.cleaned_data
+            **cleaned_data
         )
         new_post.save()
+
+        files = request.FILES.getlist('gallery')
+        for img in files:
+            new_gallery = PostsGallery.objects.create(
+                item=new_post,
+                upload=img,
+            )
+            new_gallery.save()
+
         messages.success(request, 'Ваш пост был успешно создан')
         return redirect('users:profile')
     return render(request, template_name, context)
 
 
 def edit_post(request, pk):
-    curr_post = get_object_or_404(Posts, pk=pk)
-    form = PostsForms(
-        data=request.POST,
-        files=request.FILES,
-        instance=curr_post
-    )
     template_name = 'posts/edit_post.html'
+    curr_post = get_object_or_404(Posts, pk=pk)
+
+    if curr_post.animal_type == 1:
+        form = AddCatForm(
+            data=request.POST or None,
+            files=request.FILES or None,
+            instance=curr_post
+        )
+    elif curr_post.animal_type == 2:
+        form = AddDogForm(
+            data=request.POST or None,
+            files=request.FILES or None,
+            instance=curr_post
+        )
+    else:
+        form = AddOtherForm(
+            data=request.POST or None,
+            files=request.FILES or None,
+            instance=curr_post
+        )
+
     context = {
         'form': form,
     }
+
     if request.user.id != curr_post.user.id:
         messages.error(request, 'У вас нет доступа к чужому посту')
         return redirect('homepage:home')
     if request.method == 'POST' and form.is_valid():
         update_attrs(curr_post, **form.cleaned_data)
+        files = request.FILES.getlist('gallery')
+
+        if files:
+            curr_post_gallery = PostsGallery.objects.post_gallery(item_id=pk)
+            for img in curr_post_gallery:
+                img.delete()
+
+            for img in files:
+                new_gallery = PostsGallery.objects.create(
+                    item=curr_post,
+                    upload=img,
+                )
+                new_gallery.save()
+
         messages.success(request, 'Пост был успешно обновлен')
         return redirect('users:profile')
     return render(request, template_name, context)
