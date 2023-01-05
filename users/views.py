@@ -66,7 +66,11 @@ def profile(request):
             update = form.save(commit=False)
             update.user = request.user
             update.save()
-            profile_posts = Posts.objects.filter(user=request.user)
+            profile_posts = Posts.objects.filter(
+                pk__in=Favourites.objects.get_user_fav_posts(
+                    user=request.user
+                )
+            )
         else:
             form = CustomShelterProfileForm(
                 data=request.POST,
@@ -75,11 +79,8 @@ def profile(request):
             update = form.save(commit=False)
             update.user = request.user
             update.save()
-            profile_posts = Posts.objects.filter(
-                pk__in=Favourites.objects.get_user_fav_posts(
-                    user=request.user
-                )
-            )
+            profile_posts = Posts.objects.filter(user=request.user)
+
     elif request.user.is_shelter:
         form = CustomShelterProfileForm(instance=request.user)
         profile_posts = Posts.objects.filter(user=request.user)
@@ -97,7 +98,6 @@ def profile(request):
         ): profile_posts,
     }
     return render(request, 'users/profile.html', context)
-
 
 def shelter_profile(request, pk):
     form = CustomUserProfileForm(instance=request.user)
