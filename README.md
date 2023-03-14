@@ -127,3 +127,6 @@ No yet :(
 
 - [Miro](https://miro.com/app/board/uXjVP6-w5OI=)
 - [DB diagram](https://app.quickdatabasediagrams.com/#/d/kBHEAB/)
+
+## issues
+https://github.com/dino-mayk/GoToHome/issues
